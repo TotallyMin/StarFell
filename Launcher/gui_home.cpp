@@ -300,7 +300,7 @@ void frame(Launcher& launcher, const Fonts& fonts, HWND window, Ui& ui, ModsPane
     draw_plate(draw, fonts, ImVec2(S(50), S(40)), greet ? "Welcome, " + ui.steam_name : std::string("StarFell"),
                version);
     // Brushed title beneath the plate.
-    draw_title(draw, fonts, ImVec2(S(52), S(100)), "RESKATE");
+    draw_title(draw, fonts, ImVec2(S(52), S(100)), "STARFELL");
     window_buttons(draw, window, size);
 
     ImGui::BeginDisabled(modal);
