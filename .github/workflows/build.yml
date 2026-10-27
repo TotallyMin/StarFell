@@ -14,7 +14,7 @@ permissions:
 jobs:
   build:
     name: Windows x64 Release
-    runs-on: windows-2026
+    runs-on: windows-latest
     timeout-minutes: 30
     defaults:
       run:
@@ -39,15 +39,15 @@ jobs:
           $ErrorActionPreference = 'Stop'
           $package = 'build/package'
           New-Item -ItemType Directory -Path "$package/licenses" -Force | Out-Null
-          Copy-Item -LiteralPath 'build/vs2022-x64/Release/StarFellLauncher.exe' -Destination $package
-          Copy-Item -LiteralPath 'build/vs2022-x64/Release/StarFell.dll' -Destination $package
+          Copy-Item -LiteralPath 'build/vs2026-x64/Release/StarFellLauncher.exe' -Destination $package
+          Copy-Item -LiteralPath 'build/vs2026-x64/Release/StarFell.dll' -Destination $package
           $symbols = 'build/symbols'
           New-Item -ItemType Directory -Path $symbols -Force | Out-Null
           foreach ($name in @('StarFell', 'StarFellLauncher')) {
-            Copy-Item -LiteralPath "build/vs2022-x64/Release/$name.pdb" -Destination $symbols
+            Copy-Item -LiteralPath "build/vs2026-x64/Release/$name.pdb" -Destination $symbols
           }
-          Copy-Item -LiteralPath 'build/vs2022-x64/Release/StarFell.dll' -Destination $symbols
-          Copy-Item -LiteralPath 'build/vs2022-x64/Release/StarFellLauncher.exe' -Destination $symbols
+          Copy-Item -LiteralPath 'build/vs2026-x64/Release/StarFell.dll' -Destination $symbols
+          Copy-Item -LiteralPath 'build/vs2026-x64/Release/StarFellLauncher.exe' -Destination $symbols
           Copy-Item -LiteralPath 'LICENSE' -Destination "$package/LICENSE.txt"
           foreach ($library in @('imgui', 'detours', 'rapidjson', 'sqlite', 'miniz', 'bcdec')) {
             Copy-Item -LiteralPath "External/$library/LICENSE.txt" -Destination "$package/licenses/$library-LICENSE.txt"
