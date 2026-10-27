@@ -1,10 +1,16 @@
-# StarFell
+<div align="center">
 
-play it offline, host your own lobbies and dedicated servers, and mod it.
-the launcher, the runtime that loads into the game, and the dedicated server.
+![image](.github/banner.jpg)
 
-> StarFell is a fan project. It is not affiliated with or endorsed by Electronic Arts or Full Circle.
-> You need your own copy of skate. on Steam.
+</div>
+
+StarFell allows you to play **skate.** offline, host your own lobbies and have the able to mod the game however you want!
+
+> [!IMPORTANT]
+> StarFell is a hobby project and is not affiliated with or endorsed by Electronic Arts (EA) or Full Circle.
+> You need your own copy of skate. on steam, which you can get by clicking the link below
+
+https://store.steampowered.com/app/3354750/skate/
 
 ## Features
 
@@ -98,14 +104,14 @@ access.
 
 ### Build
 
-From a *Developer PowerShell for VS 2022* in the repository folder:
+From a *Developer PowerShell for VS 2026* in the repository folder:
 
 ```powershell
-cmake --preset vs2022-x64
+cmake --preset vs2026-x64
 cmake --build --preset release --parallel 4
 ```
 
-The files are written to `build/vs2022-x64/Release/`:
+The files are written to `build/vs2026-x64/Release/`:
 
 | File | What it is |
 |---|---|
@@ -114,7 +120,7 @@ The files are written to `build/vs2022-x64/Release/`:
 | `StarFellServer.exe` | the dedicated server |
 | `StarFellEmotePacker.exe` | builds the chat emote pack in `assets/emotes` |
 
-To work in Visual Studio, open `build/vs2022-x64/StarFell.sln` after configuring and select
+To work in Visual Studio, open `build/vs2026-x64/StarFell.sln` after configuring and select
 **Release | x64**.
 
 ### Running your build
@@ -154,9 +160,9 @@ Each module keeps its regression tests in a `Test/` folder. Turn them on with an
 and `STARFELL_BUILD_BACKTRACE_TESTS`, then run CTest:
 
 ```powershell
-cmake --preset vs2022-x64 -DSTARFELL_BUILD_MULTIPLAYER_TESTS=ON -DSTARFELL_BUILD_LAUNCHER_TESTS=ON
+cmake --preset vs2026-x64 -DSTARFELL_BUILD_MULTIPLAYER_TESTS=ON -DSTARFELL_BUILD_LAUNCHER_TESTS=ON
 cmake --build --preset release --parallel 4
-ctest --test-dir build/vs2022-x64 -C Release
+ctest --test-dir build/vs2026-x64 -C Release
 ```
 
 The project builds with `/W4 /WX`: warnings are errors.
