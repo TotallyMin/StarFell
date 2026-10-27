@@ -44,7 +44,7 @@ endforeach()
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/generated")
 # Keep a complete copy in the build directory for validation and users who
 # need a legacy loose defaults override.
-file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/generated/reskate.defaults.json" "${profile_defaults}\n")
+file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/generated/starfell.defaults.json" "${profile_defaults}\n")
 string(HEX "${profile_defaults}" STARFELL_DEFAULTS_HEX)
 string(REGEX REPLACE "(..)" "0x\\1," STARFELL_DEFAULTS_BYTES "${STARFELL_DEFAULTS_HEX}")
 configure_file(cmake/templates/profile_defaults.h.in generated/embedded_profile_defaults.h @ONLY)

@@ -58,7 +58,7 @@ bool apply_headless_updates(const app::Session& session, const update::Config& c
         update::replace_running_launcher(session.self, config.launcher);
         starfell::logging::log(Level::info, Channel::launcher, "Launcher updated to {}; restarting.", config.launcher.version);
         auto arguments = original;
-        arguments.emplace_back(L"--reskate-updated");
+        arguments.emplace_back(L"--starfell-updated");
         app::relaunch(session.self, arguments);
         return true;
     } catch (const std::exception& exception) {
@@ -69,7 +69,7 @@ bool apply_headless_updates(const app::Session& session, const update::Config& c
 
 void run_headless(const app::Session& session, std::vector<std::wstring> arguments,
                   const std::vector<std::wstring>& original) {
-    const bool relaunched = take_flag(arguments, L"--reskate-updated");
+    const bool relaunched = take_flag(arguments, L"--starfell-updated");
     const bool updates = !take_flag(arguments, L"--no-update") && starfell::launcher_gui::updates_enabled(session);
     const auto options = starfell::launcher::parse_launch_options(arguments);
     update::remove_previous_launcher(session.self);
@@ -93,7 +93,7 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int) {
             L"StarFell Launcher", MB_OK | MB_ICONERROR | MB_SETFOREGROUND);
         return 1;
     }
-    if (argc > 1 && std::wstring_view(argv[1]) == L"--reskate-crash-helper") {
+    if (argc > 1 && std::wstring_view(argv[1]) == L"--starfell-crash-helper") {
         const auto result = starfell::backtrace::run_reporter(argc, argv);
         LocalFree(argv);
         return result;
@@ -108,7 +108,7 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int) {
     try {
         std::string log_level = "info";
         if (headless) log_level = starfell::launcher::parse_launch_options(
-            [&] { auto copy = arguments; take_flag(copy, L"--no-update"); take_flag(copy, L"--reskate-updated"); return copy; }()).log_level;
+            [&] { auto copy = arguments; take_flag(copy, L"--no-update"); take_flag(copy, L"--starfell-updated"); return copy; }()).log_level;
         starfell::launcher_gui::apply_crash_report_setting();
         const auto session = app::open_session(log_level);
         logs = session.paths.logs;

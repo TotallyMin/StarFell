@@ -24,15 +24,15 @@ namespace starfell::launcher_mods {
 namespace {
 
 // What the game loads from a mod, and the files that only describe one.
-constexpr std::array<std::string_view, 2> content_markers{"layout.toc", "reskate-levels.json"};
-constexpr std::array<std::string_view, 2> info_markers{"manifest.json", "reskate-mod.json"};
+constexpr std::array<std::string_view, 2> content_markers{"layout.toc", "starfell-levels.json"};
+constexpr std::array<std::string_view, 2> info_markers{"manifest.json", "starfell-mod.json"};
 // Thunderstore requires these at the top of a package (lower case here); they
 // follow the mod in when it is packed one folder deeper.
 constexpr std::array<std::string_view, 4> package_files{"manifest.json", "icon.png", "readme.md", "changelog.md"};
-constexpr char no_mod[] = " does not contain a StarFell mod (no layout.toc, reskate-levels.json or manifest.json).";
+constexpr char no_mod[] = " does not contain a StarFell mod (no layout.toc, starfell-levels.json or manifest.json).";
 // Staging lives inside Mods so the final move is a rename on one volume; the
 // leading dot keeps the runtime from ever treating it as a mod.
-constexpr wchar_t staging_folder[] = L".reskate-install";
+constexpr wchar_t staging_folder[] = L".starfell-install";
 
 [[noreturn]] void fail(const std::string& message) { throw std::runtime_error(message); }
 
@@ -84,7 +84,7 @@ struct Root {
     bool content{};       // holds something the game loads
 };
 
-// The shallowest folder holding game content (layout.toc, reskate-levels.json
+// The shallowest folder holding game content (layout.toc, starfell-levels.json
 // or parks/<map>.park.json), else the shallowest holding only a description.
 // Content wins so a package's own manifest.json at the top cannot hide a mod
 // packed one folder down.
@@ -149,7 +149,7 @@ std::string mod_name(const Root& root, const std::string& source_name, const Ins
 // refused when asked, and the author goes into manifest.json.
 void finish(const fs::path& staging, const Root& root, const std::string& source_name, const InstallOptions& options) {
     if (options.require_content && !root.content)
-        fail(source_name + " has nothing for StarFell to load: no layout.toc, reskate-levels.json or parks folder. "
+        fail(source_name + " has nothing for StarFell to load: no layout.toc, starfell-levels.json or parks folder. "
              "Only mods built with StarFell Studio, and park mods, can be installed.");
     const auto manifest = staging / mods::manifest_file;
     std::error_code error;

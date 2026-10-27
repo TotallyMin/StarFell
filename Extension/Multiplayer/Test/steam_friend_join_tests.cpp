@@ -6,16 +6,16 @@ using namespace starfell::multiplayer;
 void check(bool value, const char* message) { if (!value) throw std::runtime_error(message); }
 int main() {
     try {
-        check(steam_join_target("+reskate_lobby 9001") == 9001, "StarFell lobby target parses");
-        for (const auto* value : {"", "+connect_lobby 9001", "+reskate_lobby ", "+reskate_lobby 0",
-                "+reskate_lobby -1", "+reskate_lobby 9001 extra", "+reskate_lobby 9001\n",
-                "+reskate_lobby 18446744073709551616", "9001"})
+        check(steam_join_target("+starfell_lobby 9001") == 9001, "StarFell lobby target parses");
+        for (const auto* value : {"", "+connect_lobby 9001", "+starfell_lobby ", "+starfell_lobby 0",
+                "+starfell_lobby -1", "+starfell_lobby 9001 extra", "+starfell_lobby 9001\n",
+                "+starfell_lobby 18446744073709551616", "9001"})
             check(!steam_join_target(value), "Unrelated or malformed Steam requests must be ignored");
         MultiplayerModel model;
         model.active = model.hosting = model.public_host = model.lobby_listed = model.local_ready = true;
         model.public_lobby = 9001; model.invite = "private-session-secret";
         const auto open = model;
-        check(steam_join_presence(model) == "+reskate_lobby 9001", "Public host advertises a lobby ID without its session code");
+        check(steam_join_presence(model) == "+starfell_lobby 9001", "Public host advertises a lobby ID without its session code");
         model.password_required = true;
         check(steam_join_presence(model).empty(), "Password-protected sessions have no one-click join");
         model = open; model.public_host = false;
@@ -31,7 +31,7 @@ int main() {
         model = open; model.active = false;
         check(steam_join_presence(model).empty(), "Ended sessions stop advertising");
         model = open; model.hosting = model.public_host = model.lobby_listed = false; model.connected = true;
-        check(steam_join_presence(model) == "+reskate_lobby 9001", "Connected guests can advertise their verified public lobby");
+        check(steam_join_presence(model) == "+starfell_lobby 9001", "Connected guests can advertise their verified public lobby");
         model.connected = false;
         check(steam_join_presence(model).empty(), "Guests cannot advertise before admission");
         std::cout << "Steam friend join checks passed.\n";

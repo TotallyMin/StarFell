@@ -326,9 +326,9 @@ std::string edit_nametags(Session &s, std::string_view argument) {
     return s.nametags ? "Peer nametags shown." : "Peer nametags hidden.";
 }
 std::string edit_nametag_style(Session &s, std::string_view argument) {
-    const auto custom = argument == "reskate" ? std::optional<bool>(true) : argument == "game" ? std::optional<bool>(false)
+    const auto custom = argument == "starfell" ? std::optional<bool>(true) : argument == "game" ? std::optional<bool>(false)
                                                                           : parse_switch(argument, s.custom_nametags);
-    if (!custom) return "Use reskate, game, or toggle for the nametag style.";
+    if (!custom) return "Use starfell, game, or toggle for the nametag style.";
     s.custom_nametags = *custom;
     s.display_preferences_loaded = true;
     apply_nametags(s);

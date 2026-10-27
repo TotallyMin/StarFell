@@ -231,7 +231,7 @@ int wmain(int argc, wchar_t** argv) {
             auto attributes = Json::parse(read(dump.wstring() + L".json"));
             attributes["integration.test"] = "true";
             attributes["error.message"] = "Synthetic StarFell Backtrace integration test; no game crash";
-            auto url = environment(L"RESKATE_BACKTRACE_URL");
+            auto url = environment(L"STARFELL_BACKTRACE_URL");
             if (url.empty()) url = configured_url;
             const auto result = upload_report(url, dump, attributes);
             std::cout << "HTTP " << result.http_status << "; Windows error " << result.error << "; report " << result.report_id << '\n';
@@ -246,8 +246,8 @@ int wmain(int argc, wchar_t** argv) {
                 native_fixture_directory = local / L"StarFell" / L"Game" / L"Skate" / L"CrashDumps";
                 std::filesystem::create_directories(native_fixture_directory);
             }
-            SetEnvironmentVariableW(L"RESKATE_CRASH_REPORTING", L"1");
-            SetEnvironmentVariableW(L"RESKATE_BACKTRACE_URL", L"https://127.0.0.1:1/test/minidump");
+            SetEnvironmentVariableW(L"STARFELL_CRASH_REPORTING", L"1");
+            SetEnvironmentVariableW(L"STARFELL_BACKTRACE_URL", L"https://127.0.0.1:1/test/minidump");
             SetUnhandledExceptionFilter(finish_child);
             logging::Options options; options.directory = argv[2]; options.truncate_file = true;
             check(logging::initialize(options), "Fixture logging failed");
@@ -258,10 +258,10 @@ int wmain(int argc, wchar_t** argv) {
         check(argc == 2, "Pass a fixture root");
         const auto root = std::filesystem::path(argv[1]) / std::format(L"run-{}-{}", GetCurrentProcessId(), GetTickCount64());
         std::filesystem::create_directories(root);
-        SetEnvironmentVariableW(L"RESKATE_CRASH_REPORTING", L"0");
+        SetEnvironmentVariableW(L"STARFELL_CRASH_REPORTING", L"0");
         check(start(root) == StartResult::disabled, "Explicit opt-out ignored");
-        SetEnvironmentVariableW(L"RESKATE_CRASH_REPORTING", L"1");
-        SetEnvironmentVariableW(L"RESKATE_BACKTRACE_URL", L"http://invalid/post");
+        SetEnvironmentVariableW(L"STARFELL_CRASH_REPORTING", L"1");
+        SetEnvironmentVariableW(L"STARFELL_BACKTRACE_URL", L"http://invalid/post");
         check(start(root) == StartResult::failed, "Invalid endpoint enabled reporter");
         endpoint_checks();
         attachment_checks(root);

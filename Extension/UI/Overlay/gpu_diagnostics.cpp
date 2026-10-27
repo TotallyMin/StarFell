@@ -27,7 +27,7 @@ bool graphics_option_enabled(const wchar_t* name) noexcept {
 void initialize_graphics_diagnostics() noexcept {
     const auto error = GetLastError();
     try {
-        const bool diagnostic = graphics_option_enabled(L"RESKATE_GPU_DIAGNOSTICS");
+        const bool diagnostic = graphics_option_enabled(L"STARFELL_GPU_DIAGNOSTICS");
         starfell::logging::printf(starfell::logging::Level::debug, starfell::logging::Channel::graphics, "Graphics startup: gpu_diagnostics=%d", diagnostic);
         if (diagnostic) {
             // DRED must be configured before the game creates its D3D12 device.

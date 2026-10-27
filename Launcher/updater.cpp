@@ -277,7 +277,7 @@ Config parse_config(std::string_view text) {
 
 std::optional<Config> fetch_config() {
     std::array<wchar_t, 32768> local{};
-    const auto local_length = GetEnvironmentVariableW(L"RESKATE_LAUNCHER_CONFIG_FILE", local.data(), static_cast<DWORD>(local.size()));
+    const auto local_length = GetEnvironmentVariableW(L"STARFELL_LAUNCHER_CONFIG_FILE", local.data(), static_cast<DWORD>(local.size()));
     if (local_length && local_length < local.size()) {
         // Test an unpublished config before attaching it to a release.
         const fs::path path(std::wstring(local.data(), local_length));

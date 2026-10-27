@@ -6,7 +6,7 @@
 #include <string_view>
 #include <vector>
 
-// Thunderstore (thunderstore.io/c/reskate): the package listing the launcher's
+// Thunderstore (thunderstore.io/c/starfell): the package listing the launcher's
 // Mods browser shows. No network here; gui_mods_browse.cpp fetches with
 // launcher_update::http_get. StarFell packages have no dependencies.
 //
@@ -15,10 +15,10 @@
 namespace starfell::thunderstore {
 
 inline constexpr char site[] = "https://thunderstore.io";
-inline constexpr char default_community[] = "reskate";
+inline constexpr char default_community[] = "starfell";
 
-// The community the browser lists: RESKATE_THUNDERSTORE_COMMUNITY when set
-// (to try the browser against a community that has packages), else reskate.
+// The community the browser lists: STARFALL_THUNDERSTORE_COMMUNITY when set
+// (to try the browser against a community that has packages), else starfell.
 std::string community();
 // /c/<community>/api/v1/package-listing-index/: a gzipped JSON array of
 // gzipped listing chunks. The plain listing below is the fallback.

@@ -44,7 +44,7 @@ int main(int argc, char** argv) {
     try {
         const fs::path game_root = argv[1], mod = argv[2], base_root = game_root / L"Data";
         const auto layout = starfell::vfs::read_layout(mod / L"layout.toc");
-        const CasStore store(base_root, fs::temp_directory_path() / L"reskate-bundle-ref-test", layout.root);
+        const CasStore store(base_root, fs::temp_directory_path() / L"starfell-bundle-ref-test", layout.root);
         const auto base = read_table(store, base_root, base_root, game_root);
         const auto copy = read_table(store, mod, base_root, game_root);
         const fb::bundle_ref::Table base_table{base.bytes, base.meta}, mod_table{copy.bytes, copy.meta};

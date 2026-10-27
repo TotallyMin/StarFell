@@ -23,7 +23,7 @@ std::string text(const std::filesystem::path &file) {
 
 int run() {
     using namespace starfell::server;
-    const auto folder = std::filesystem::temp_directory_path() / "reskate_server_config_tests";
+    const auto folder = std::filesystem::temp_directory_path() / "starfell_server_config_tests";
     std::filesystem::remove_all(folder);
     std::filesystem::create_directories(folder);
     const auto file = folder / "StarFellServer.json";

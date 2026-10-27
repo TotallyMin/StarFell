@@ -1,6 +1,6 @@
 #include "overlay_internal.h"
 #include "Engine/Core/Platform/launcher_support.h"
-#include "reskate_version.h"
+#include "starfell_version.h"
 
 using namespace starfell::overlay::detail;
 namespace starfell::overlay::detail {
@@ -35,7 +35,7 @@ void draw_notices() {
         const auto keys = starfell::launcher::overlay_keys();
         const auto name = [](unsigned key) { return key == VK_OEM_3 ? std::string("~") : starfell::launcher::key_name(key); };
         starfell::overlay::notify(NoticeLevel::info,
-            starfell::reskate_release_build ? "StarFell " + std::string(starfell::reskate_version) + " loaded"
+            starfell::starfell_release_build ? "StarFell " + std::string(starfell::starfell_version) + " loaded"
                                             : std::string("StarFell loaded (development build)"),
             "Press " + name(keys.menu) + " for the menu and " + name(keys.console) + " for the console.");
     }

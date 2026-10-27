@@ -22,7 +22,7 @@ struct Catalog {
     // Disabled mods that ship a layout. Their archives are placed in the
     // launch's merge too, so one can be enabled while the game runs.
     std::vector<Mod> inactive;
-    // True once Mods/.reskate holds the merged patch every mod was combined
+    // True once Mods/.starfell holds the merged patch every mod was combined
     // into. Empty catalogues never generate one.
     bool merged{};
     // Non-empty when mods.json was rejected; nothing is loaded in that case.
@@ -55,10 +55,10 @@ Catalog load_catalog(const std::filesystem::path& data_root, const MergeObserver
 // Only that first call's `observe` is ever used.
 const Catalog& catalog(const MergeObserver& observe = {}) noexcept;
 
-// reskate-levels.json for every enabled mod, highest priority first.
+// starfell-levels.json for every enabled mod, highest priority first.
 std::vector<std::filesystem::path> level_manifest_paths(const Catalog& catalog);
 
-// The enabled mod whose reskate-levels.json registers a level named inside
+// The enabled mod whose starfell-levels.json registers a level named inside
 // `destination` (a level path or a loader's "root + level @ start" line),
 // ignoring ASCII case; null when no mod does.
 const Mod* mod_registering(const Catalog& catalog, std::string_view destination) noexcept;

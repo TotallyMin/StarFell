@@ -26,8 +26,8 @@ template<std::size_t N> bool copy(std::array<wchar_t, N>& target, const std::wst
 StartResult start(const std::filesystem::path& log_directory) noexcept {
     try {
         if (report) return StartResult::ready;
-        if (environment(L"RESKATE_CRASH_REPORTING") == L"0") return StartResult::disabled;
-        auto url = environment(L"RESKATE_BACKTRACE_URL");
+        if (environment(L"STARFELL_CRASH_REPORTING") == L"0") return StartResult::disabled;
+        auto url = environment(L"STARFELL_BACKTRACE_URL");
         if (url.empty()) url = configured_url;
         if (url.empty()) return StartResult::disabled;
         if (!url.starts_with(L"https://") || url.size() >= SharedReport{}.url.size()) return StartResult::failed;
@@ -74,7 +74,7 @@ StartResult start(const std::filesystem::path& log_directory) noexcept {
         struct Attributes { LPPROC_THREAD_ATTRIBUTE_LIST value; ~Attributes() { DeleteProcThreadAttributeList(value); } } cleanup{attributes};
         if (!UpdateProcThreadAttribute(attributes, 0, PROC_THREAD_ATTRIBUTE_HANDLE_LIST,
                 inherited.data(), sizeof(inherited), nullptr, nullptr)) return StartResult::failed;
-        auto command = std::format(L"\"{}\" --reskate-crash-helper", executable.wstring());
+        auto command = std::format(L"\"{}\" --starfell-crash-helper", executable.wstring());
         for (const auto handle : inherited) command += std::format(L" {}", reinterpret_cast<ULONG_PTR>(handle));
         STARTUPINFOEXW startup{};
         startup.StartupInfo.cb = sizeof(startup);

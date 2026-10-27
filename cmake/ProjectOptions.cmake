@@ -8,11 +8,11 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 # Windows version information (Explorer's Details tab) for the shipped binaries. The release
 # script passes its version; local builds say 0.0.0.
 set(STARFELL_VERSION "0.0.0" CACHE STRING "Release version stamped into the shipped binaries")
-# The same version for code to show (generated/reskate_version.h).
-string(REPLACE "\\" "\\\\" reskate_version_escaped "${STARFELL_VERSION}")
-string(REPLACE "\"" "\\\"" reskate_version_escaped "${reskate_version_escaped}")
-configure_file("${PROJECT_SOURCE_DIR}/cmake/templates/reskate_version.h.in"
-    "${CMAKE_CURRENT_BINARY_DIR}/generated/reskate_version.h" @ONLY)
+# The same version for code to show (generated/starfell_version.h).
+string(REPLACE "\\" "\\\\" starfell_version_escaped "${STARFELL_VERSION}")
+string(REPLACE "\"" "\\\"" starfell_version_escaped "${starfell_version_escaped}")
+configure_file("${PROJECT_SOURCE_DIR}/cmake/templates/starfell_version.h.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/generated/starfell_version.h" @ONLY)
 function(starfell_version_info target description file_name file_type)
     if(NOT STARFELL_VERSION MATCHES "^([0-9]+)\\.([0-9]+)\\.([0-9]+)")
         message(FATAL_ERROR "STARFELL_VERSION must look like 1.2.3, not '${STARFELL_VERSION}'")

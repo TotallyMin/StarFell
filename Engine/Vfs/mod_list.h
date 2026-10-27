@@ -15,7 +15,7 @@ namespace starfell::mods {
 inline constexpr std::size_t maximum_mods = 64;
 inline constexpr std::size_t maximum_mod_name = 64;
 // Generated state the SDK owns. Folders beginning with a dot are never mods.
-inline constexpr char generated_folder[] = ".reskate";
+inline constexpr char generated_folder[] = ".starfell";
 inline constexpr char mods_folder[] = "Mods";
 inline constexpr char order_file[] = "mods.json";
 // The mod's own description, written by its author or by the park editor:
@@ -24,31 +24,31 @@ inline constexpr char order_file[] = "mods.json";
 inline constexpr char manifest_file[] = "manifest.json";
 // The older name for the same information ("version" instead of
 // "version_number"), still read when a mod has no manifest.json.
-inline constexpr char info_file[] = "reskate-mod.json";
+inline constexpr char info_file[] = "starfell-mod.json";
 // StarFell Studio's stamp in every mod it builds: "StarFell Studio native Patch v1", then
 // key=value lines, of which skate_sha256=<the Skate.exe it was built for> decides whether the
 // mod loads: game data built for another Skate.exe points into that build's archives.
-inline constexpr char studio_marker_file[] = ".reskate-studio-patch";
+inline constexpr char studio_marker_file[] = ".starfell-studio-patch";
 
 struct Mod {
     std::string name;                 // folder name directly under Mods/
     std::filesystem::path directory;
     bool provides_layout{};           // has layout.toc, so it becomes a layout layer
-    bool provides_levels{};           // has reskate-levels.json
+    bool provides_levels{};           // has starfell-levels.json
     // Base maps it ships a park for: parks/<map>.park.json (park editor mods).
     std::vector<std::string> park_maps;
-    // Presentation, from manifest.json (or reskate-mod.json). `title` falls back to the folder
-    // name and `version` to the one reskate-build.json records.
+    // Presentation, from manifest.json (or starfell-mod.json). `title` falls back to the folder
+    // name and `version` to the one starfell-build.json records.
     std::string title, author, version, description;
-    // What built the mod and when, from reskate-build.json; empty when the mod
+    // What built the mod and when, from starfell-build.json; empty when the mod
     // predates that file or was made by another tool.
     std::string tool, built;
-    // The level assets its reskate-levels.json registers, read loosely for
+    // The level assets its starfell-levels.json registers, read loosely for
     // logging; the strict reading that feeds the level list happens later.
     std::vector<std::string> levels;
     // What the merge could not use from this mod. Empty once it merged cleanly.
     std::vector<std::string> problems;
-    // From .reskate-studio-patch: whether the mod has one, and the Skate.exe SHA-256 it records.
+    // From .starfell-studio-patch: whether the mod has one, and the Skate.exe SHA-256 it records.
     bool studio_marker{};
     std::string skate_sha256;
     // Why the mod cannot load on this game build (it must be updated), or empty. Such a mod is left
@@ -58,9 +58,9 @@ struct Mod {
 };
 
 // Mods left out of the merge because they could not be merged cleanly, kept
-// in <Mods>/.reskate-excluded.json so later launches skip them without merging
+// in <Mods>/.starfell-excluded.json so later launches skip them without merging
 // twice. An entry holds only while the mod's files are unchanged.
-inline constexpr char exclusions_file[] = ".reskate-excluded.json";
+inline constexpr char exclusions_file[] = ".starfell-excluded.json";
 struct Exclusion {
     std::string fingerprint;           // mod_fingerprint() when it was left out
     std::string sdk;                   // the StarFell.dll that left it out; a new one retries

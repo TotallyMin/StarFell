@@ -37,7 +37,7 @@ std::filesystem::path log_directory(const std::filesystem::path& game_directory)
 Options options_from_environment() {
     detail::PreserveError preserve;
     Options options;
-    options.directory = environment(L"RESKATE_LOG_DIRECTORY");
+    options.directory = environment(L"STARFELL_LOG_DIRECTORY");
     if (options.directory.empty()) {
         options.truncate_file = true;
         std::array<wchar_t, 32768> module{};
@@ -45,8 +45,8 @@ Options options_from_environment() {
         if (!count || count >= module.size()) throw std::runtime_error("Cannot resolve log directory");
         options.directory = log_directory(std::filesystem::path(module.data()).parent_path());
     }
-    if (const auto level = parse_level(detail::utf8(environment(L"RESKATE_LOG_LEVEL")))) options.level = *level;
-    options.external_console = environment(L"RESKATE_LOG_CONSOLE") == L"1";
+    if (const auto level = parse_level(detail::utf8(environment(L"STARFELL_LOG_LEVEL")))) options.level = *level;
+    options.external_console = environment(L"STARFELL_LOG_CONSOLE") == L"1";
     return options;
 }
 namespace detail {

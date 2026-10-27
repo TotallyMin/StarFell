@@ -251,8 +251,8 @@ std::optional<std::uint64_t> last_steam_id() {
 void configure_environment(const fs::path& logs) {
     set_environment(L"SteamAppId", app_id);
     set_environment(L"SteamGameId", app_id);
-    set_environment(L"RESKATE_LOG_DIRECTORY", logs.c_str());
-    set_environment(L"RESKATE_DEBUG_TEST_GLOBAL_OFFLINE", L"1");
+    set_environment(L"STARFELL_LOG_DIRECTORY", logs.c_str());
+    set_environment(L"STARFELL_DEBUG_TEST_GLOBAL_OFFLINE", L"1");
 }
 
 template<class T>
@@ -573,7 +573,7 @@ DWORD start_game(const Session& session, const launcher::LaunchOptions& options,
     }
     configure_environment(paths.logs);
     const bool loose_files = options.loose_files && initfs::loose_files_preference(paths.directory);
-    set_environment(L"RESKATE_LOOSE_FILES", loose_files ? L"1" : L"0");
+    set_environment(L"STARFELL_LOOSE_FILES", loose_files ? L"1" : L"0");
     if (loose_files) {
         fs::create_directories(paths.directory / L"scripts" / L"Custom");
         const auto exported = initfs::export_files(paths.game,
@@ -587,25 +587,25 @@ DWORD start_game(const Session& session, const launcher::LaunchOptions& options,
                 exported.scripts, exported.configs, exported.created, exported.preserved, exported.skipped);
         }
     }
-    set_environment(L"RESKATE_LOG_CONSOLE", options.window_console ? L"1" : L"0");
-    set_environment(L"RESKATE_LOG_LEVEL", widen(options.log_level).c_str());
-    set_environment(L"RESKATE_FORCE_WINDOWED", options.force_windowed ? L"1" : L"0");
-    set_environment(L"RESKATE_WINDOW_WIDTH", options.force_windowed ? std::to_wstring(options.width).c_str() : nullptr);
-    set_environment(L"RESKATE_WINDOW_HEIGHT", options.force_windowed ? std::to_wstring(options.height).c_str() : nullptr);
+    set_environment(L"STARFELL_LOG_CONSOLE", options.window_console ? L"1" : L"0");
+    set_environment(L"STARFELL_LOG_LEVEL", widen(options.log_level).c_str());
+    set_environment(L"STARFELL_FORCE_WINDOWED", options.force_windowed ? L"1" : L"0");
+    set_environment(L"STARFELL_WINDOW_WIDTH", options.force_windowed ? std::to_wstring(options.width).c_str() : nullptr);
+    set_environment(L"STARFELL_WINDOW_HEIGHT", options.force_windowed ? std::to_wstring(options.height).c_str() : nullptr);
     std::wstring command = quote_argument(paths.game.wstring());
     for (const auto& argument : options.game_arguments) {
         command.push_back(L' ');
         command += quote_argument(argument);
     }
-    set_environment(L"RESKATE_GPU_DIAGNOSTICS", options.gpu_diagnostics ? L"1" : L"0");
+    set_environment(L"STARFELL_GPU_DIAGNOSTICS", options.gpu_diagnostics ? L"1" : L"0");
     if (options.menu_key == options.console_key)
         throw std::runtime_error("The menu and console need different keys. Change one in Settings.");
-    set_environment(L"RESKATE_MENU_KEY", std::to_wstring(options.menu_key).c_str());
-    set_environment(L"RESKATE_CONSOLE_KEY", std::to_wstring(options.console_key).c_str());
+    set_environment(L"STARFELL_MENU_KEY", std::to_wstring(options.menu_key).c_str());
+    set_environment(L"STARFELL_CONSOLE_KEY", std::to_wstring(options.console_key).c_str());
     const bool offline = options.offline || !launcher_app::steam_signed_in();
-    set_environment(L"RESKATE_OFFLINE", offline ? L"1" : L"0");
+    set_environment(L"STARFELL_OFFLINE", offline ? L"1" : L"0");
     const auto steam_id = offline ? last_steam_id() : std::nullopt;
-    set_environment(L"RESKATE_OFFLINE_STEAM_ID", steam_id ? std::to_wstring(*steam_id).c_str() : nullptr);
+    set_environment(L"STARFELL_OFFLINE_STEAM_ID", steam_id ? std::to_wstring(*steam_id).c_str() : nullptr);
     if (offline)
         logging::write(logging::Level::info, logging::Channel::launcher, options.offline ?
             L"Offline mode: requested; Steam is not used" : L"Offline mode: Steam is not running or not signed in");

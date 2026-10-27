@@ -143,10 +143,10 @@ extern "C" __declspec(dllexport) BOOL WINAPI StarFellDebugInitialize() {
         // and the Patch folder keeps working for a single Studio-built map.
         const auto& mod_catalog = starfell::mods::catalog();
         const auto patch_level_path = std::filesystem::path(
-            std::wstring(self_path, self_length)).parent_path() / L"Patch" / L"reskate-levels.json";
+            std::wstring(self_path, self_length)).parent_path() / L"Patch" / L"starfell-levels.json";
         r.patch_level_manifests = {patch_level_path};
         if (!mod_catalog.data_root.empty()) {
-            const auto data_level_path = mod_catalog.data_root / L"Patch" / L"reskate-levels.json";
+            const auto data_level_path = mod_catalog.data_root / L"Patch" / L"starfell-levels.json";
             std::error_code level_path_error;
             if (!std::filesystem::equivalent(patch_level_path, data_level_path, level_path_error) ||
                 level_path_error) r.patch_level_manifests.push_back(data_level_path);
@@ -224,7 +224,7 @@ extern "C" __declspec(dllexport) BOOL WINAPI StarFellDebugInitialize() {
         // guard first in forwarding-only mode. Launches without it do not
         // install this hook.
         const bool global_offline_requested = exact_environment_one(
-            L"RESKATE_DEBUG_TEST_GLOBAL_OFFLINE");
+            L"STARFELL_DEBUG_TEST_GLOBAL_OFFLINE");
         const bool progression_guard_prepared = global_offline_requested &&
             starfell::prepare_progression_service_guard(r.base);
         record("{\"event\":\"progression_service_guard_prepared\",\"requested\":" +

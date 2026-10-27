@@ -36,7 +36,7 @@ constexpr std::uintptr_t flow_adapter_return_rva = offline::flow_adapter_return;
 constexpr std::uintptr_t post_spawn_progression_return_rva =
     offline::post_spawn_progression_return;
 constexpr std::uintptr_t image_size = supported_build::game_image_size;
-constexpr wchar_t opt_in_name[] = L"RESKATE_DEBUG_TEST_GLOBAL_OFFLINE";
+constexpr wchar_t opt_in_name[] = L"STARFELL_DEBUG_TEST_GLOBAL_OFFLINE";
 
 static_assert(function_rva + 16 <= image_size,
     "Shared OnlineEnabled fingerprint must remain inside the inspected image");

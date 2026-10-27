@@ -440,7 +440,7 @@ void emote_picker(ChatState& c, ImFont* heading, ImVec2 bottom_left, float width
     constexpr auto flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove |
         ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing |
         ImGuiWindowFlags_NoNav | ImGuiWindowFlags_NoScrollbar;
-    if (ImGui::Begin("##reskate_emote_picker", nullptr, flags)) {
+    if (ImGui::Begin("##starfell_emote_picker", nullptr, flags)) {
         std::string shown = names.front();
         ImGui::BeginChild("##emote_grid", ImVec2(0.0f, grid), ImGuiChildFlags_None);
         for (std::size_t i = 0; i < names.size(); ++i) {
@@ -571,10 +571,10 @@ void draw_chat() {
         ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 1.0f);
         constexpr auto flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove |
             ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoScrollbar;
-        if (ImGui::Begin("##reskate_chat", nullptr, flags)) {
+        if (ImGui::Begin("##starfell_chat", nullptr, flags)) {
             ImGui::PushFont(body);
             ImGui::SetWindowFontScale(scale * 0.9f);
-            ImGui::BeginChild("##reskate_chat_lines", ImVec2(0.0f, -ImGui::GetFrameHeightWithSpacing()));
+            ImGui::BeginChild("##starfell_chat_lines", ImVec2(0.0f, -ImGui::GetFrameHeightWithSpacing()));
             ImGui::PushTextWrapPos(0.0f);
             auto& layouts = chat_layouts().open;
             for (const auto& line : c.feed.lines) {
@@ -630,7 +630,7 @@ void draw_chat() {
                 // The overlay runs no frames while nothing of it is on screen, so after Esc closed
                 // the chat ImGui can still hold the box as active, and would write its old text back
                 // over ours: have it take the text from the buffer again.
-                const auto input_id = ImGui::GetID("##reskate_chat_input");
+                const auto input_id = ImGui::GetID("##starfell_chat_input");
                 if (auto* active = ImGui::GetInputTextState(input_id); active && ImGui::GetActiveID() == input_id)
                     active->ReloadUserBufAndMoveToEnd();
                 ImGui::SetKeyboardFocusHere();
@@ -647,7 +647,7 @@ void draw_chat() {
                 c.completions_version = found.version;
             }
             ImGui::SetNextItemWidth(-FLT_MIN);
-            if (ImGui::InputTextWithHint("##reskate_chat_input", "Say something, or / for commands  (Enter sends, Esc closes)",
+            if (ImGui::InputTextWithHint("##starfell_chat_input", "Say something, or / for commands  (Enter sends, Esc closes)",
                                          c.input.data(), c.input.size(),
                                          ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_CallbackCompletion |
                                              ImGuiInputTextFlags_CallbackAlways,

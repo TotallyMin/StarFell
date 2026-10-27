@@ -85,7 +85,7 @@ OverlayKeys overlay_keys() noexcept {
             const auto parsed = std::wcstoul(value, &end, 0);
             return end && *end == L'\0' && bindable_key(parsed) ? static_cast<unsigned>(parsed) : fallback;
         };
-        OverlayKeys result{read(L"RESKATE_MENU_KEY", default_menu_key), read(L"RESKATE_CONSOLE_KEY", default_console_key)};
+        OverlayKeys result{read(L"STARFELL_MENU_KEY", default_menu_key), read(L"STARFELL_CONSOLE_KEY", default_console_key)};
         if (result.menu == result.console) result = {};
         SetLastError(incoming_error);
         return result;
@@ -97,7 +97,7 @@ bool offline_mode() noexcept {
     static const bool offline = [] {
         const auto incoming_error = GetLastError();
         wchar_t value[2]{};
-        const auto length = GetEnvironmentVariableW(L"RESKATE_OFFLINE", value, 2);
+        const auto length = GetEnvironmentVariableW(L"STARFELL_OFFLINE", value, 2);
         SetLastError(incoming_error);
         return length == 1 && value[0] == L'1';
     }();
@@ -109,7 +109,7 @@ std::uint64_t offline_steam_id() noexcept {
         constexpr std::uint64_t fallback = 0x0110000100000001ull;
         const auto incoming_error = GetLastError();
         char value[32]{};
-        const auto length = GetEnvironmentVariableA("RESKATE_OFFLINE_STEAM_ID", value, sizeof(value));
+        const auto length = GetEnvironmentVariableA("STARFELL_OFFLINE_STEAM_ID", value, sizeof(value));
         SetLastError(incoming_error);
         if (!length || length >= sizeof(value)) return fallback;
         char* end{};

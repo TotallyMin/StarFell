@@ -92,7 +92,7 @@ std::optional<MultiplayerLobby> read_server_tags(std::string_view tags, std::uin
     MultiplayerLobby row;
     row.id = row.owner = steam_id;
     row.dedicated = true;
-    bool reskate{}, version{};
+    bool starfell{}, version{};
     std::uint64_t secret{};
     const auto integer = [](std::string_view text, int &out) {
         const auto result = std::from_chars(text.data(), text.data() + text.size(), out);
@@ -102,7 +102,7 @@ std::optional<MultiplayerLobby> read_server_tags(std::string_view tags, std::uin
         const auto comma = tags.find(',');
         const auto tag = tags.substr(0, comma);
         tags = comma == std::string_view::npos ? std::string_view{} : tags.substr(comma + 1);
-        if (tag == "reskate") { reskate = true; continue; }
+        if (tag == "starfell") { starfell = true; continue; }
         if (tag.empty()) continue;
         const auto value = tag.substr(1);
         switch (tag[0]) {
@@ -121,7 +121,7 @@ std::optional<MultiplayerLobby> read_server_tags(std::string_view tags, std::uin
         default: break;
         }
     }
-    if (!reskate || !version || !secret || row.capacity < 1) return {};
+    if (!starfell || !version || !secret || row.capacity < 1) return {};
     row.code = format_invite({steam_id, secret});
     if (row.name.empty()) row.name = "StarFell server";
     return row;
@@ -149,7 +149,7 @@ void SteamServerBrowser::refresh(std::uint64_t now) {
     // The internet list, filtered by Steam on the tags; and the LAN list, whose
     // servers answer directly (live map and ping) and show up at once.
     static Filter filter{"gametagsand", {}};
-    const auto wanted = "reskate,v" + std::to_string(protocol_version);
+    const auto wanted = "starfell,v" + std::to_string(protocol_version);
     std::memcpy(filter.value, wanted.c_str(), wanted.size() + 1);
     Filter *filters[] = {&filter};
     for (const bool lan : {false, true}) {

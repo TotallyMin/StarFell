@@ -20,7 +20,7 @@ namespace starfell::mods {
 namespace {
 namespace fs = std::filesystem;
 
-constexpr char levels_name[] = "reskate-levels.json";
+constexpr char levels_name[] = "starfell-levels.json";
 
 std::string lower(std::string_view text) {
     std::string result(text);
@@ -146,7 +146,7 @@ Catalog load_catalog(const std::filesystem::path& data_root, const MergeObserver
                 break;
             }
             if (!entry.mod.provides_layout && !entry.mod.provides_levels && entry.mod.park_maps.empty())
-                result.notes.push_back("Mod " + entry.mod.name + " has no layout.toc or reskate-levels.json");
+                result.notes.push_back("Mod " + entry.mod.name + " has no layout.toc or starfell-levels.json");
             result.mods.push_back(std::move(entry.mod));
         }
         std::sort(result.disabled.begin(), result.disabled.end(),

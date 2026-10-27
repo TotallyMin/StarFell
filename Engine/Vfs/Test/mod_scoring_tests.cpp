@@ -27,7 +27,7 @@ constexpr char flip[] = "gameplay/scorables/fliptricks/scoreable_360flip";
 fb::Sha1 game_flip(const fs::path& game) {
     const auto base = game / L"Data";
     const auto layout = starfell::vfs::read_layout(base / L"layout.toc");
-    const CasStore store(base, fs::temp_directory_path() / L"reskate-scoring-test-out", layout.root);
+    const CasStore store(base, fs::temp_directory_path() / L"starfell-scoring-test-out", layout.root);
     for (const auto& bundle : fb::read_toc(read_file(base / core_toc)).bundles) {
         if (lower(bundle.name) != core_bundle) continue;
         if (const auto listing = list_bundle(store, base, base, bundle, game))
@@ -96,7 +96,7 @@ int main(int argc, char** argv) {
 
         // Synthetic mods next to the real game: one carries the game's own copy of the 360 flip
         // and adds a scorable the game does not have, one changes the 360 flip's points.
-        const auto root = fs::temp_directory_path() / L"reskate-scoring-test";
+        const auto root = fs::temp_directory_path() / L"starfell-scoring-test";
         std::error_code error;
         fs::remove_all(root, error);
         const auto original = game_flip(argv[1]);

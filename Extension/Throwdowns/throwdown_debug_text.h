@@ -18,8 +18,8 @@ overlay::GameText skate_debug_text();
 // empty while the game's debug text is shown instead.
 overlay::SkateHud skate_hud();
 // StarFell's HUD (the default) or the game's own debug text.
-void set_skate_hud_reskate(bool reskate) noexcept;
-bool skate_hud_reskate() noexcept;
+void set_skate_hud_starfell(bool starfell) noexcept;
+bool skate_hud_starfell() noexcept;
 // Everyone's S.K.A.T.E. letters added up, as the running throwdown's HUD last listed them
 // (its {Uid, Score} list), or -1 while none is showing. Any thread.
 int skate_letters_total() noexcept;

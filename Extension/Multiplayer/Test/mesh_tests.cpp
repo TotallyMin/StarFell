@@ -349,7 +349,7 @@ void join_tick_checks() {
             auto backend = std::make_unique<JoinLobby>();
             api = backend.get();
             api->host_id = host.host_id;
-            api->metadata = {{"rs_kind", "reskate-co-skate"},
+            api->metadata = {{"rs_kind", "starfell-co-skate"},
                 {"rs_protocol", std::to_string(protocol_version)},
                 {"rs_build", std::string(supported_build::game_sha256)},
                 {"rs_name", "Host"}, {"rs_map", map}, {"rs_code", code},

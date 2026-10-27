@@ -42,7 +42,7 @@ std::string gzip(std::string_view text, bool with_name = false) {
 
 constexpr char listing[] = R"([
   {"name": "Desert_Springs", "full_name": "Zee-Desert_Springs", "owner": "Zee",
-   "package_url": "https://thunderstore.io/c/reskate/p/Zee/Desert_Springs/",
+   "package_url": "https://thunderstore.io/c/starfell/p/Zee/Desert_Springs/",
    "date_created": "2026-10-01T10:00:00Z", "date_updated": "2026-10-02T09:00:00Z",
    "rating_score": 4, "is_pinned": false, "is_deprecated": false, "has_nsfw_content": false,
    "categories": ["Mods", "Maps"],
@@ -128,9 +128,9 @@ int main() {
     check(!thunderstore::update_available(desert, installed), "A package that is not installed has no update");
 
     // ------------------------------------------------ community
-    check(thunderstore::listing_index_url("reskate") == L"https://thunderstore.io/c/reskate/api/v1/package-listing-index/",
+    check(thunderstore::listing_index_url("starfell") == L"https://thunderstore.io/c/starfell/api/v1/package-listing-index/",
           "The listing index URL");
-    check(thunderstore::community_page("reskate") == L"https://thunderstore.io/c/reskate/", "The community page URL");
+    check(thunderstore::community_page("starfell") == L"https://thunderstore.io/c/starfell/", "The community page URL");
 
     if (failures) {
         std::cerr << failures << " Thunderstore check(s) failed\n";

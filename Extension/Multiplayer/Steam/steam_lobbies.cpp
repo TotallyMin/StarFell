@@ -18,7 +18,7 @@ void require(bool value, const char *why) {
 } // namespace
 std::optional<MultiplayerLobby> read_lobby(std::uint64_t id, std::uint64_t owner,
                                            const std::function<std::string(const char *)> &get) {
-    if (!id || get("rs_kind") != "reskate-co-skate" ||
+    if (!id || get("rs_kind") != "starfell-co-skate" ||
         get("rs_protocol") != std::to_string(protocol_version) ||
         get("rs_build") != supported_build::game_sha256 || get("rs_open") != "1")
         return {};
@@ -88,7 +88,7 @@ void SteamLobbies::publish_host() {
     require(api_->joinable(lobby_, false), "Steam could not close the lobby listing.");
     state_.listed = false;
     const std::pair<const char *, std::string> values[]{
-        {"rs_kind", "reskate-co-skate"},
+        {"rs_kind", "starfell-co-skate"},
         {"rs_protocol", std::to_string(protocol_version)},
         {"rs_build", std::string(supported_build::game_sha256)},
         {"rs_name", host_name_},

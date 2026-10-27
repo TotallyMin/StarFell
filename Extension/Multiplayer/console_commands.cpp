@@ -31,7 +31,7 @@ void register_multiplayer_commands(Commands &registry) {
                           Command{"tpall", "Host or server admin: teleport everyone to you"},
                           Command{"tphere", "Host or server admin: teleport one player to you"},
                           Command{"nametags", "Show or hide player nametags (on, off, toggle)"},
-                          Command{"nametag-style", "StarFell nametags or the game's own (reskate, game, toggle)"},
+                          Command{"nametag-style", "StarFell nametags or the game's own (starfell, game, toggle)"},
                           Command{"score-check", "Host: keep players whose mods change scoring or physics out of throwdowns and "
                                                  "coop challenges (on, off, toggle; on by default)"},
                           Command{"retry", "Retry remote skater creation after an error"},
@@ -139,19 +139,19 @@ void register_multiplayer_commands(Commands &registry) {
         out(multiplayer::puppet_saving_status());
     };
     registry.add(std::move(savings));
-    auto hud_choice = argument("reskate|game", Type::text, true);
-    hud_choice.complete = [](const Model &, auto) { return std::vector<std::string>{"reskate", "game"}; };
+    auto hud_choice = argument("starfell|game", Type::text, true);
+    hud_choice.complete = [](const Model &, auto) { return std::vector<std::string>{"starfell", "game"}; };
     auto hud = action("throwdown-hud",
                       "The S.K.A.T.E. throwdown HUD: StarFell's (default) or the game's own debug text",
                       Group::gameplay, {std::move(hud_choice)});
     hud.run = [](const Model &, const Values &values, const Output &out) {
         const auto &choice = std::get<std::string>(values[0]);
-        if (choice == "reskate" || choice == "game") multiplayer::set_skate_hud_reskate(choice == "reskate");
+        if (choice == "starfell" || choice == "game") multiplayer::set_skate_hud_starfell(choice == "starfell");
         else if (!choice.empty()) {
-            out("error: Choose reskate or game.");
+            out("error: Choose starfell or game.");
             return;
         }
-        out(multiplayer::skate_hud_reskate() ? "S.K.A.T.E. HUD: StarFell's." : "S.K.A.T.E. HUD: the game's debug text.");
+        out(multiplayer::skate_hud_starfell() ? "S.K.A.T.E. HUD: StarFell's." : "S.K.A.T.E. HUD: the game's debug text.");
     };
     registry.add(std::move(hud));
     auto offboard_choice = argument("on|off", Type::text, true);

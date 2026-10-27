@@ -1404,8 +1404,8 @@ void initialize_throwdown_lab(Address base) noexcept {
         l.installed.store(true, std::memory_order_release);
     } catch (const std::exception& e) { logging::write(logging::Level::warning, logging::Channel::progression, e.what()); }
     // The condition probe replaces the game's AND / OR / NOT, which every authored
-    // condition runs through; opt in with RESKATE_THROWDOWN_PROBE=1.
-    if (!GetEnvironmentVariableW(L"RESKATE_THROWDOWN_PROBE", nullptr, 0)) return;
+    // condition runs through; opt in with STARFELL_THROWDOWN_PROBE=1.
+    if (!GetEnvironmentVariableW(L"STARFELL_THROWDOWN_PROBE", nullptr, 0)) return;
     try {
         struct Op { Address rva; std::array<unsigned char, 9> prefix; void* replacement; };
         const std::array ops{Op{throwdowns::bool_and, throwdowns::bool_and_prefix, reinterpret_cast<void*>(&and_probe)},

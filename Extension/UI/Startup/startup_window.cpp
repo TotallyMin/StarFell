@@ -287,7 +287,7 @@ struct Window {
         SelectObject(dc, title);
         SetBkMode(dc, TRANSPARENT);
         SetTextColor(dc, paper);
-        constexpr wchar_t wordmark[] = L"RESKATE";
+        constexpr wchar_t wordmark[] = L"STARFELL";
         SIZE extent{};
         GetTextExtentPoint32W(dc, wordmark, static_cast<int>(std::size(wordmark) - 1), &extent);
         const int left = (width - extent.cx) / 2, top = height * 2 / 5 - extent.cy / 2;

@@ -416,7 +416,7 @@ void apply_now() {
     loading_screen::set_live_screens(std::move(screens));
     for (const auto *name : {"globals", "items"}) {
         std::string toc_problem;
-        const auto file = mods::engine_data_root() / L"Mods" / L".reskate" / L"Win32" / (std::string(name) + ".toc");
+        const auto file = mods::engine_data_root() / L"Mods" / L".starfell" / L"Win32" / (std::string(name) + ".toc");
         if (refresh_toc(std::string("Win32/") + name, file, toc_problem))
             logging::log(logging::Level::info, logging::Channel::assets, "Live mods: the game now reads the merged {} TOC", name);
         else if (problem.empty())

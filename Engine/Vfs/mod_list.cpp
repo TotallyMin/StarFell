@@ -18,10 +18,10 @@ namespace {
 namespace fs = std::filesystem;
 
 constexpr char layout_name[] = "layout.toc";
-constexpr char levels_name[] = "reskate-levels.json";
+constexpr char levels_name[] = "starfell-levels.json";
 // Written by the tool that built the mod (Studio, since 2026-09-24): who made
 // it and when. Purely informational, so it is read loosely and never rejected.
-constexpr char build_name[] = "reskate-build.json";
+constexpr char build_name[] = "starfell-build.json";
 constexpr std::size_t maximum_order_bytes = 256 * 1024;
 constexpr std::size_t maximum_build_bytes = 16 * 1024;
 constexpr std::size_t maximum_info_bytes = 32 * 1024;
@@ -76,7 +76,7 @@ std::string string_field(const Json& root, const char* name, std::size_t limit) 
     return root.contains(name) && root.at(name).is_string() ? printable(root.at(name).string(), limit) : std::string{};
 }
 
-// reskate-build.json: {"schema":1,"tool":"StarFellStudio","version":"1.0.0",
+// starfell-build.json: {"schema":1,"tool":"StarFellStudio","version":"1.0.0",
 // "built":"2026-09-24T18:35:00Z"}. Extra fields are fine; a broken file is a
 // note, never a reason to skip the mod.
 void read_build_info(Mod& mod, std::vector<std::string>& notes) {
@@ -96,7 +96,7 @@ void read_build_info(Mod& mod, std::vector<std::string>& notes) {
     }
 }
 
-// manifest.json (or reskate-mod.json for mods made before manifests): the
+// manifest.json (or starfell-mod.json for mods made before manifests): the
 // author's own description of the mod.
 void read_mod_info(Mod& mod, std::vector<std::string>& notes) {
     std::error_code error;
@@ -136,7 +136,7 @@ void read_levels(Mod& mod) {
     }
 }
 
-// .reskate-studio-patch: the stamp line, then key=value lines. A mod that ships game data must
+// .starfell-studio-patch: the stamp line, then key=value lines. A mod that ships game data must
 // record the Skate.exe it was built for, and it must be this one (supported_build).
 void read_studio_marker(Mod& mod) {
     const auto path = mod.directory / studio_marker_file;

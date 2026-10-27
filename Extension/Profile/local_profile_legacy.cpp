@@ -12,7 +12,7 @@ std::string encode_legacy(const Snapshot& s) {
         s.neighborhood_ranks.size() <= max_records,
         "Too many local profile records");
     std::ostringstream out;
-    out << "RESKATE_LOCAL_PROFILE 1\nrevision " << s.revision << "\nonboarding_seed " << s.onboarding_seed << '\n';
+    out << "STARFELL_LOCAL_PROFILE 1\nrevision " << s.revision << "\nonboarding_seed " << s.onboarding_seed << '\n';
     for (const auto& [key, v] : s.bool_options) {
         require(valid_text(key), "Invalid profile option key");
         out << "bool " << std::quoted(key) << ' ' << (v ? 1 : 0) << '\n';
@@ -56,7 +56,7 @@ Snapshot decode_legacy(std::string_view text) {
     std::string tag;
     unsigned version{};
     Snapshot s;
-    require(bool(in >> tag >> version) && tag == "RESKATE_LOCAL_PROFILE" && version == 1,
+    require(bool(in >> tag >> version) && tag == "STARFELL_LOCAL_PROFILE" && version == 1,
         "Unsupported local profile version");
     require(bool(in >> tag >> s.revision) && tag == "revision", "Missing profile revision");
     require(bool(in >> tag >> s.onboarding_seed) && tag == "onboarding_seed", "Missing seed version");

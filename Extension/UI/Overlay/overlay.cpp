@@ -293,7 +293,7 @@ bool start_overlay(const starfell::overlay::CallbacksV3* callbacks) {
     std::lock_guard lock(s.hook_mutex);
     if (s.started || s.stop.load()) return false;
     starfell::overlay::initialize_graphics_diagnostics();
-    s.force_windowed = starfell::overlay::graphics_option_enabled(L"RESKATE_FORCE_WINDOWED");
+    s.force_windowed = starfell::overlay::graphics_option_enabled(L"STARFELL_FORCE_WINDOWED");
     {
         wchar_t game[32768]{};
         const auto length = GetModuleFileNameW(nullptr, game, 32768);

@@ -150,11 +150,11 @@ void set_activity(ModsPanel& panel, std::string text) {
     panel.activity = std::move(text);
 }
 
-// Downloads one package into Mods/.reskate-download, then installs it over any
+// Downloads one package into Mods/.starfell-download, then installs it over any
 // installed copy (which goes to the Recycle Bin, keeping its place in mods.json).
 std::string install_package(ModsPanel& panel, const fs::path& root, const ts::Package& package) {
     const auto& version = package.latest();
-    const auto folder = root / L".reskate-download";
+    const auto folder = root / L".starfell-download";
     const auto archive = folder / (wide(package.full_name) + L".zip");
     std::error_code error;
     fs::create_directories(folder, error);
@@ -454,7 +454,7 @@ void browse_page(const Fonts& fonts, ModsPanel& panel, float height, bool instal
         }
     } else if (store.packages.empty()) {
         centred("No mods on Thunderstore yet. Made one? Package it with a manifest.json, icon.png and README.md "
-                "and upload it to thunderstore.io/c/reskate.");
+                "and upload it to thunderstore.io/c/starfell.");
     } else if (packages.empty()) {
         centred("No mods match your search.");
     }

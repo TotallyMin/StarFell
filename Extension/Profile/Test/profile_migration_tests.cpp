@@ -1,5 +1,5 @@
 // Opens a COPY of a real save and reports what loading it changes. Only runs
-// when given a scratch folder holding reskate.sqlite3 (never point it at the
+// when given a scratch folder holding starfell.sqlite3 (never point it at the
 // live profile folder: loading commits the migrated document).
 //   starfell_profile_migration_tests <scratch folder>
 #include "Extension/Profile/local_profile.h"
@@ -11,7 +11,7 @@ int main(int argc, char** argv) {
         std::cout << "No scratch save given; skipped.\n";
         return 0;
     }
-    const auto save = std::filesystem::absolute(argv[1]) / "reskate.sqlite3";
+    const auto save = std::filesystem::absolute(argv[1]) / "starfell.sqlite3";
     profile::Store store(save);
     const auto snapshot = store.snapshot();
     const auto policy = profile::challenge_policy(snapshot);

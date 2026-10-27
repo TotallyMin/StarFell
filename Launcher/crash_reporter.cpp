@@ -72,7 +72,7 @@ bool collect_native_dump(HANDLE process, const SharedReport& report, const std::
     return publish_dump(temporary, report, "game-native");
 }
 int run(int argc, wchar_t** argv) {
-    if (argc != handle_count + 2 || std::wstring_view(argv[1]) != L"--reskate-crash-helper") return 2;
+    if (argc != handle_count + 2 || std::wstring_view(argv[1]) != L"--starfell-crash-helper") return 2;
     std::array<Handle, handle_count> handles;
     for (std::size_t i = 0; i < handle_count; ++i) {
         const std::wstring_view value(argv[i + 2]);

@@ -57,7 +57,7 @@ struct State {
     overlay::SkateHud hud; // `shown`, read
     std::vector<std::string> done; // the tricks set in this game, as the HUD named them
     std::chrono::steady_clock::time_point shown_at{};
-    std::atomic<bool> reskate{true};
+    std::atomic<bool> starfell{true};
     std::set<Address> patched, refused; // loaded copies of the graph
     std::atomic<unsigned> logged{};
 };
@@ -354,7 +354,7 @@ int skate_letters_total() noexcept {
 
 overlay::GameText skate_debug_text() {
     auto& s = state();
-    if (s.reskate.load(std::memory_order_relaxed)) return {};
+    if (s.starfell.load(std::memory_order_relaxed)) return {};
     std::lock_guard lock(s.mutex);
     if (s.shown.empty() || std::chrono::steady_clock::now() - s.shown_at > std::chrono::milliseconds(300)) return {};
     return {static_cast<float>(screen_width), static_cast<float>(screen_height), s.shown};
@@ -362,7 +362,7 @@ overlay::GameText skate_debug_text() {
 
 overlay::SkateHud skate_hud() {
     auto& s = state();
-    if (!s.reskate.load(std::memory_order_relaxed)) return {};
+    if (!s.starfell.load(std::memory_order_relaxed)) return {};
     std::lock_guard lock(s.mutex);
     if (s.shown.empty()) return {};
     const auto age = std::chrono::steady_clock::now() - s.shown_at;
@@ -382,6 +382,6 @@ overlay::SkateHud skate_hud() {
     return result;
 }
 
-void set_skate_hud_reskate(bool reskate) noexcept { state().reskate.store(reskate, std::memory_order_relaxed); }
-bool skate_hud_reskate() noexcept { return state().reskate.load(std::memory_order_relaxed); }
+void set_skate_hud_starfell(bool starfell) noexcept { state().starfell.store(starfell, std::memory_order_relaxed); }
+bool skate_hud_starfell() noexcept { return state().starfell.load(std::memory_order_relaxed); }
 } // namespace starfell::multiplayer

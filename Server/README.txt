@@ -15,7 +15,7 @@ set world layers (time of day and so on) for everyone.
 Custom maps
 -----------
 Copy a custom map's mod folder from the game's Mods folder into a Mods folder
-next to the server (only its reskate-levels.json is read). The map can then be
+next to the server (only its starfell-levels.json is read). The map can then be
 chosen by name. Players need the same map mod installed to join.
 
 Players connect through Steam's relay network, so no ports need opening. If you

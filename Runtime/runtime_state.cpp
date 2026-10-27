@@ -12,7 +12,7 @@ namespace starfell::runtime::detail {
 Runtime& runtime() { static auto* value = new Runtime; return *value; }
 
 // The destinations mods and the Patch folder declare: every mod's
-// reskate-levels.json (highest priority first), then the Patch folders'.
+// starfell-levels.json (highest priority first), then the Patch folders'.
 starfell::CustomLevelManifest read_custom_levels(const std::vector<std::filesystem::path>& mod_manifests) {
     auto paths = mod_manifests;
     const auto& patch = runtime().patch_level_manifests;

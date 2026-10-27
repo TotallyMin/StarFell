@@ -26,7 +26,7 @@ namespace loose = addr::loose_files;
 constexpr std::uintptr_t open_rva = loose::vfs_open, exists_rva = loose::vfs_exists;
 constexpr std::uintptr_t create_directory_rva = loose::create_directory, mount_rva = loose::vfs_mount,
     global_vfs_rva = loose::global_vfs;
-constexpr char mount_point[] = "/__reskate_loose";
+constexpr char mount_point[] = "/__starfell_loose";
 std::atomic<Open> original_open{};
 std::atomic<Exists> original_exists{};
 std::mutex install_mutex;

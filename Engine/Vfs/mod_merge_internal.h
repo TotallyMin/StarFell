@@ -57,8 +57,8 @@ struct ArchivePlacement {
 fb::Sha1 sha1_of(std::span<const std::byte> bytes);
 
 // Where the launch's merge put every installed mod's archives, and which
-// superbundle TOCs the patch holds: Mods/.reskate/reskate-placements.json.
-inline constexpr wchar_t placements_file[] = L"reskate-placements.json";
+// superbundle TOCs the patch holds: Mods/.starfell/starfell-placements.json.
+inline constexpr wchar_t placements_file[] = L"starfell-placements.json";
 struct PlacementRecord {
     std::map<std::string, ArchivePlacement, std::less<>> mods;
     std::vector<std::string> tocs;
@@ -72,7 +72,7 @@ void write_placements(const fs::path& file, const PlacementRecord& record);
 
 std::string merge_fingerprint(const Catalog& catalog, const std::vector<const Mod*>& mods,
                               const std::map<const Mod*, RelativeFiles>& modFiles);
-inline constexpr wchar_t stamp_file[] = L"reskate-merge.stamp";
+inline constexpr wchar_t stamp_file[] = L"starfell-merge.stamp";
 std::optional<MergeReport> previous_merge(const fs::path& output, const std::string& fingerprint);
 void write_stamp(const fs::path& output, const std::string& fingerprint, const MergeReport& report);
 

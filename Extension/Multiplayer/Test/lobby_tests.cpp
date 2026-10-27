@@ -64,7 +64,7 @@ struct Fake final : LobbyApi {
     std::string name() override { return "Test host"; }
     void record(std::uint64_t id = 9001) {
         owners[id] = host_id;
-        metadata[id] = {{"rs_kind", "reskate-co-skate"},
+        metadata[id] = {{"rs_kind", "starfell-co-skate"},
                         {"rs_protocol", std::to_string(protocol_version)},
                         {"rs_build", std::string(supported_build::game_sha256)},
                         {"rs_name", "Test host"},

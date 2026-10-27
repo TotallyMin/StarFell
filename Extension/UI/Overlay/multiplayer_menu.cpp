@@ -253,7 +253,7 @@ void multiplayer_display_settings(SkateMenu &menu, const Model &model) {
                    "green for your Steam friends; far and off-screen players as dots. Off: the game's own nametags and arrows.",
                    custom, mp.nametags, "OFF")) {
         std::array<char, 65> unused{};
-        send_private(menu, "nametag-style", custom ? "reskate" : "game", unused, false);
+        send_private(menu, "nametag-style", custom ? "starfell" : "game", unused, false);
     }
     bool chat = mp.chat_visible;
     if (toggle_row(menu, "Text chat", "Show session chat in the bottom-right corner; T opens it. Hidden, nothing shows and T does nothing.",

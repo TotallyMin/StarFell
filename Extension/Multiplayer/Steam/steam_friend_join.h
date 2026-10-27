@@ -5,7 +5,7 @@
 #include <string_view>
 
 namespace starfell::multiplayer {
-inline constexpr std::string_view steam_join_prefix = "+reskate_lobby ";
+inline constexpr std::string_view steam_join_prefix = "+starfell_lobby ";
 inline std::optional<std::uint64_t> steam_join_target(std::string_view text) {
     if (!text.starts_with(steam_join_prefix)) return {};
     text.remove_prefix(steam_join_prefix.size());

@@ -239,7 +239,7 @@ void installed_page(const Fonts& fonts, ModsPanel& panel, const thunderstore::In
         for (const auto& map : mod.park_maps) parks += (parks.empty() ? "" : ", ") + map;
         field("PARKS", parks);
         if (!mod.provides_layout && !mod.provides_levels && mod.park_maps.empty())
-            field("NOTE", "This folder has no layout.toc or reskate-levels.json, so the game has nothing to load from it.");
+            field("NOTE", "This folder has no layout.toc or starfell-levels.json, so the game has nothing to load from it.");
         ImGui::Spacing();
         if (update) {
             ImGui::BeginDisabled(installing);
@@ -330,7 +330,7 @@ void mods_window(Launcher& launcher, const Fonts& fonts, ImVec2 size, Ui& ui, Mo
     mods_tabs(panel, pending.size());
     ImGui::PushTextWrapPos(0);
     if (browsing)
-        ImGui::TextDisabled("Mods published on Thunderstore (thunderstore.io/c/reskate). Installed mods load the next "
+        ImGui::TextDisabled("Mods published on Thunderstore (thunderstore.io/c/starfell). Installed mods load the next "
                             "time Skate starts; updates appear here and on the INSTALLED tab.");
     else
         ImGui::TextDisabled("Mods load top to bottom: where two mods change the same thing, the higher one wins. "

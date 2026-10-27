@@ -1,0 +1,8 @@
+#pragma once
+#include <string_view>
+
+namespace starfell {
+// The release version (STARFELL_VERSION); local builds say 0.0.0.
+inline constexpr std::string_view starfell_version = "@starfell_version_escaped@";
+inline constexpr bool starfell_release_build = starfell_version != "0.0.0";
+}

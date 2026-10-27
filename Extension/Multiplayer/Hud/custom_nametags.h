@@ -23,12 +23,11 @@ inline constexpr std::uint32_t nametag_white = 0xffffffffU, nametag_developer = 
                                nametag_friend = 0xff8ae07bU;                             // green
 inline constexpr std::uint32_t nametag_developer_start = 0xffff206eU; // #6E20FF, IM_COL32 layout
 // StarFell's developers, by SteamID64 (Steam authenticates it; it cannot be claimed).
-inline constexpr std::array<std::uint64_t, 2> reskate_developers{
-    76561198084159190ULL, // zee_x64
-    76561198255588397ULL, // reglitched
+inline constexpr std::array<std::uint64_t, 2> starfell_developers{
+    76561199743320422ULL
 };
-inline bool reskate_developer(std::uint64_t id) noexcept {
-    for (const auto developer : reskate_developers)
+inline bool starfell_developer(std::uint64_t id) noexcept {
+    for (const auto developer : starfell_developers)
         if (developer == id) return true;
     return false;
 }

@@ -111,16 +111,16 @@ std::filesystem::path temporary_file(std::wstring_view name) {
     wchar_t folder[MAX_PATH + 1]{};
     const auto length = GetTempPathW(MAX_PATH, folder);
     auto path = std::filesystem::path(length ? std::wstring(folder, length) : L".") /
-                (L"reskate-" + std::wstring(name) + L"-" + std::to_wstring(GetCurrentProcessId()) + L".json");
+                (L"starfell-" + std::wstring(name) + L"-" + std::to_wstring(GetCurrentProcessId()) + L".json");
     std::error_code error;
     std::filesystem::remove(path, error); // https::get needs a fresh destination
     return path;
 }
-// RESKATE_NEWS_FILE=<path> reads a local news file instead, to preview a
+// STARFELL_NEWS_FILE=<path> reads a local news file instead, to preview a
 // change before publishing it.
 std::filesystem::path preview_file() {
     std::wstring value(4096, L'\0');
-    const auto length = GetEnvironmentVariableW(L"RESKATE_NEWS_FILE", value.data(), static_cast<DWORD>(value.size()));
+    const auto length = GetEnvironmentVariableW(L"STARFELL_NEWS_FILE", value.data(), static_cast<DWORD>(value.size()));
     if (!length || length >= value.size()) return {};
     value.resize(length);
     return value;

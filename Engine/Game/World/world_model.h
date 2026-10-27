@@ -15,7 +15,7 @@ struct LevelInfo {
     std::uint8_t level_flag68{};
     // Manifest rows are detached-level destinations, never base/root levels.
     bool manifest_only{};
-    // Declared by a mod's reskate-levels.json (a custom map).
+    // Declared by a mod's starfell-levels.json (a custom map).
     bool custom{};
 };
 struct WorldCatalog {

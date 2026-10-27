@@ -1,7 +1,7 @@
 # A submission token grants report submission only; never use an API/admin token.
 set(backtrace_default_url "https://submit.backtrace.io/r5rlauncher/657dc750570e574383ec9d78548fed4c5d5061be3033d7adc064a4c6c28e058d/minidump")
-if(NOT "$ENV{RESKATE_BACKTRACE_URL}" STREQUAL "")
-    set(backtrace_default_url "$ENV{RESKATE_BACKTRACE_URL}")
+if(NOT "$ENV{STARFELL_BACKTRACE_URL}" STREQUAL "")
+    set(backtrace_default_url "$ENV{STARFELL_BACKTRACE_URL}")
 endif()
 set(STARFELL_BACKTRACE_URL "${backtrace_default_url}" CACHE STRING "Backtrace HTTPS minidump submission URL (empty disables uploads)")
 if(STARFELL_BACKTRACE_URL AND NOT STARFELL_BACKTRACE_URL MATCHES "^https://[^ \r\n\t]+$")

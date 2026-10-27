@@ -33,7 +33,7 @@ bool listed(const std::vector<mods::Mod> &mods, std::string_view name) {
 int main() {
     wchar_t temp[MAX_PATH]{};
     GetTempPathW(MAX_PATH, temp);
-    const auto root = fs::path(temp) / ("reskate-mod-stamp-" + std::to_string(GetCurrentProcessId()));
+    const auto root = fs::path(temp) / ("starfell-mod-stamp-" + std::to_string(GetCurrentProcessId()));
     fs::remove_all(root);
     const auto mods_root = root / "Mods";
     const std::string current(supported_build::game_sha256);
@@ -42,20 +42,20 @@ int main() {
     write(mods_root / "Current" / "layout.toc", "x");
     std::string upper = current;
     for (auto &c : upper) c = static_cast<char>(std::toupper(static_cast<unsigned char>(c)));
-    write(mods_root / "Current" / ".reskate-studio-patch", "StarFell Studio native Patch v1\r\nskate_sha256=" + upper + "\r\n");
+    write(mods_root / "Current" / ".starfell-studio-patch", "StarFell Studio native Patch v1\r\nskate_sha256=" + upper + "\r\n");
     // An older Studio: the stamp without a game version.
     write(mods_root / "OldStudio" / "layout.toc", "x");
-    write(mods_root / "OldStudio" / ".reskate-studio-patch", "StarFell Studio native Patch v1\n");
+    write(mods_root / "OldStudio" / ".starfell-studio-patch", "StarFell Studio native Patch v1\n");
     // Built for another Skate.exe.
     write(mods_root / "OtherBuild" / "layout.toc", "x");
-    write(mods_root / "OtherBuild" / ".reskate-studio-patch", "StarFell Studio native Patch v1\nskate_sha256=" + other + "\n");
+    write(mods_root / "OtherBuild" / ".starfell-studio-patch", "StarFell Studio native Patch v1\nskate_sha256=" + other + "\n");
     // Game data with no stamp at all.
     write(mods_root / "Unstamped" / "layout.toc", "x");
     // A park mod ships no game data: no stamp needed.
     write(mods_root / "Park" / "parks" / "sanvan.park.json", "{}");
     // Disabled and built for another game: still left out of the merge.
     write(mods_root / "OffOld" / "layout.toc", "x");
-    write(mods_root / "OffOld" / ".reskate-studio-patch", "StarFell Studio native Patch v1\nskate_sha256=" + other + "\n");
+    write(mods_root / "OffOld" / ".starfell-studio-patch", "StarFell Studio native Patch v1\nskate_sha256=" + other + "\n");
     write(mods_root / "mods.json", R"({"schema":1,"mods":[{"name":"OffOld","enabled":false}]})");
 
     const auto list = mods::scan_mods(root);

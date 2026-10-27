@@ -54,7 +54,7 @@ std::vector<std::string> applied_mods();
 // True when the launch's merge placed this mod's archives (enabled or not),
 // so it can be enabled without a restart.
 bool placed_at_launch(const std::string& name);
-// reskate-levels.json of every mod a live apply left enabled, highest
+// starfell-levels.json of every mod a live apply left enabled, highest
 // priority first; handed out once per successful apply.
 std::optional<std::vector<std::filesystem::path>> take_level_manifests();
 }

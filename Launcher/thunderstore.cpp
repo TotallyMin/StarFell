@@ -113,7 +113,7 @@ std::uint32_t little32(const unsigned char* bytes) {
 std::string community() {
     std::array<char, 128> value{};
     std::size_t length{};
-    if (getenv_s(&length, value.data(), value.size(), "RESKATE_THUNDERSTORE_COMMUNITY") == 0 && length > 1) {
+    if (getenv_s(&length, value.data(), value.size(), "STARFELL_THUNDERSTORE_COMMUNITY") == 0 && length > 1) {
         const std::string name(value.data());
         const bool slug = std::all_of(name.begin(), name.end(), [](char ch) {
             return (ch >= 'a' && ch <= 'z') || (ch >= '0' && ch <= '9') || ch == '-';

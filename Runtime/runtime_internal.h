@@ -65,7 +65,7 @@ struct Runtime {
     std::atomic<ULONGLONG> named_settings_wanted_until{};
     bool named_context_ready{};
     starfell::CustomLevelManifest custom_levels;
-    // Patch/reskate-levels.json beside the DLL and under the data root, read after the mods'.
+    // Patch/starfell-levels.json beside the DLL and under the data root, read after the mods'.
     std::vector<std::filesystem::path> patch_level_manifests;
     ULONGLONG next_debug{}, flight_unavailable_since{};
     std::string flight_unavailable_issue, flight_unavailable_logged;

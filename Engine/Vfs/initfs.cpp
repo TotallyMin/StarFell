@@ -183,7 +183,7 @@ bool write_atomic(const fs::path& root, const fs::path& path, std::span<const un
     }
     fs::create_directories(path.parent_path());
     static std::atomic<unsigned long> sequence{};
-    const auto temporary = fs::path(path.wstring() + L".reskate-" + std::to_wstring(GetCurrentProcessId()) +
+    const auto temporary = fs::path(path.wstring() + L".starfell-" + std::to_wstring(GetCurrentProcessId()) +
         L"-" + std::to_wstring(GetTickCount64()) + L"-" + std::to_wstring(sequence.fetch_add(1)) + L".tmp");
     const auto file = CreateFileW(temporary.c_str(), GENERIC_WRITE, 0, nullptr, CREATE_NEW, FILE_ATTRIBUTE_NORMAL, nullptr);
     if (file == INVALID_HANDLE_VALUE) fail("Cannot create output file: " + path.string());
@@ -247,7 +247,7 @@ bool loose_files_preference(const fs::path& root) {
 }
 bool loose_files_session_enabled(const fs::path& root) {
     std::array<wchar_t, 8> value{};
-    if (GetEnvironmentVariableW(L"RESKATE_LOOSE_FILES", value.data(), static_cast<DWORD>(value.size())) == 1) {
+    if (GetEnvironmentVariableW(L"STARFELL_LOOSE_FILES", value.data(), static_cast<DWORD>(value.size())) == 1) {
         if (value[0] == L'0') return false;
         if (value[0] == L'1') return true;
     }

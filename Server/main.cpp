@@ -131,7 +131,7 @@ int run(int argc, wchar_t **argv, bool skip_update) {
         write_log("Cannot read " + config_file.string() + ": " + e.what());
         return 1;
     }
-    // Maps: the retail ones and custom maps from Mods\<mod>\reskate-levels.json.
+    // Maps: the retail ones and custom maps from Mods\<mod>\starfell-levels.json.
     for (const auto &problem : load_levels(here / L"Mods")) write_log("Mods: skipped " + problem);
     if (levels().size() > 6) write_log("Mods: " + std::to_string(levels().size() - 6) + " custom map(s).");
     // Older configs name the map by its full destination; keep the plain name instead.

@@ -7,7 +7,7 @@
 
 namespace starfell::offline_steam {
 
-// Offline mode (RESKATE_OFFLINE=1): Skate.exe falls back to the EA app when
+// Offline mode (STARFELL_OFFLINE=1): Skate.exe falls back to the EA app when
 // Steam fails to start, so instead Steam "starts" against stand-in interfaces.
 // The player is signed in as Unknown Player with no friends, lobbies or
 // overlay; no call ever reaches the real Steam client.

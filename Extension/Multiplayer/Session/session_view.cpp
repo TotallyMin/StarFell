@@ -507,7 +507,7 @@ std::pair<std::uint32_t, std::string> player_role(Session &s, std::uint64_t send
     if (!sender) return {};
     const bool dedicated = dedicated_host(s);
     if (dedicated && sender == s.host_id) return {nametag_admin, {}}; // the server itself
-    if (reskate_developer(sender)) return {nametag_developer, "Dev"};
+    if (starfell_developer(sender)) return {nametag_developer, "Dev"};
     const auto *peer = local ? nullptr : find_peer(s, sender);
     if (dedicated && (local ? s.server_admin : peer && peer->member.admin)) return {nametag_admin, "Admin"};
     if (!dedicated && (local ? s.mode == Mode::host : sender == s.host_id)) return {nametag_host, "Host"};

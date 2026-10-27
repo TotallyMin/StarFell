@@ -224,7 +224,7 @@ void update_model(std::uintptr_t client, TickState& frame) {
         r.next_named_settings_publish = settings_now + 250;
         publish_named_settings(r);
     }
-    // RESKATE_STARTUP_COMMANDS="load skate1map;noclip 1" (development): console commands
+    // STARFELL_STARTUP_COMMANDS="load skate1map;noclip 1" (development): console commands
     // queued in order once the world is up and can accept them, so a build can be exercised
     // without anyone driving the overlay. A load waits for its destination to be listed.
     {
@@ -232,7 +232,7 @@ void update_model(std::uintptr_t client, TickState& frame) {
         if (!startup_commands) {
             startup_commands.emplace();
             std::wstring value(4096, L'\0');
-            const auto length = GetEnvironmentVariableW(L"RESKATE_STARTUP_COMMANDS", value.data(), 4096);
+            const auto length = GetEnvironmentVariableW(L"STARFELL_STARTUP_COMMANDS", value.data(), 4096);
             if (length && length < 4096) {
                 std::string narrow;
                 for (const auto character : value.substr(0, length))

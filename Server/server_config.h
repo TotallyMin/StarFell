@@ -92,7 +92,7 @@ std::optional<std::uint64_t> parse_scoring(std::string_view text);
 struct ServerLevel {
     std::string asset, name;
 };
-// The retail maps, and the custom maps in `mods`\<mod>\reskate-levels.json
+// The retail maps, and the custom maps in `mods`\<mod>\starfell-levels.json
 // (players' map mods, copied next to the server). Returns why a mod was skipped.
 std::vector<std::string> load_levels(const std::filesystem::path &mods);
 const std::vector<ServerLevel> &levels();

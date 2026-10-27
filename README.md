@@ -26,7 +26,7 @@ the launcher, the runtime that loads into the game, and the dedicated server.
 - **Mods.**
   - Drop a mod in `Mods/` and it is merged into the game at launch. Mods can add custom maps, loading
     screens, cosmetics and scripts.
-  - Browse and install mods from the [Thunderstore community](https://thunderstore.io/c/reskate/) in the
+  - Browse and install mods from the [Thunderstore community](https://thunderstore.io/c/starfell/) in the
     launcher.
   - Most mod changes apply in game without a restart.
 - **Launcher.**
@@ -197,7 +197,7 @@ project's Backtrace account, so crashes can be fixed. The log never contains you
 login name.
 
 To turn it off, untick **Send crash reports** in the launcher's Settings (ADVANCED), or set the
-environment variable `RESKATE_CRASH_REPORTING=0`.
+environment variable `STARFELL_CRASH_REPORTING=0`.
 
 ## Third-party code
 

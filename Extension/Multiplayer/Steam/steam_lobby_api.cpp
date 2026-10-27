@@ -109,7 +109,7 @@ class NativeLobbyApi final : public LobbyApi {
         return create_(matchmaking_, 0, static_cast<int>(capacity));
     } // Initially private.
     std::uint64_t search() override {
-        filter_(matchmaking_, "rs_kind", "reskate-co-skate", 0);
+        filter_(matchmaking_, "rs_kind", "starfell-co-skate", 0);
         const auto protocol = std::to_string(protocol_version);
         filter_(matchmaking_, "rs_protocol", protocol.c_str(), 0);
         filter_(matchmaking_, "rs_build", supported_build::game_sha256.data(), 0);

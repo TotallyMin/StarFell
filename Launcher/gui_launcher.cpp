@@ -119,7 +119,7 @@ launcher::LaunchOptions launch_options(const Settings& settings) {
 
 Launcher::Launcher(const launcher_app::Session& session, std::vector<std::wstring> arguments)
     : session_(session), arguments_(std::move(arguments)), settings_(load_settings(settings_path(session))) {
-    relaunched_ = std::find(arguments_.begin(), arguments_.end(), L"--reskate-updated") != arguments_.end();
+    relaunched_ = std::find(arguments_.begin(), arguments_.end(), L"--starfell-updated") != arguments_.end();
     binaries_ = std::find(arguments_.begin(), arguments_.end(), L"--no-update") == arguments_.end();
 }
 
@@ -145,7 +145,7 @@ void Launcher::save() {
     save_settings(settings_path(session_), settings_);
     // The game inherits the launcher's environment, so this reaches the next launch; the
     // launcher's own crash reporting follows the setting from its next start.
-    SetEnvironmentVariableW(L"RESKATE_CRASH_REPORTING", settings_.crash_reports ? nullptr : L"0");
+    SetEnvironmentVariableW(L"STARFELL_CRASH_REPORTING", settings_.crash_reports ? nullptr : L"0");
 }
 
 template<class Task> void Launcher::start(Task task) {
@@ -191,8 +191,8 @@ void Launcher::answer(std::optional<std::string> value) {
 
 void Launcher::restart() {
     auto arguments = arguments_;
-    if (std::find(arguments.begin(), arguments.end(), L"--reskate-updated") == arguments.end())
-        arguments.emplace_back(L"--reskate-updated");
+    if (std::find(arguments.begin(), arguments.end(), L"--starfell-updated") == arguments.end())
+        arguments.emplace_back(L"--starfell-updated");
     launcher_app::relaunch(session_.self, arguments);
 }
 
@@ -416,7 +416,7 @@ void apply_crash_report_setting() noexcept {
         if (!length || length >= path.size()) return;
         path.resize(length);
         if (!detail::load_settings(std::filesystem::path(path).parent_path() / L"StarFellLauncher.settings.json").crash_reports)
-            SetEnvironmentVariableW(L"RESKATE_CRASH_REPORTING", L"0");
+            SetEnvironmentVariableW(L"starfell_CRASH_REPORTING", L"0");
     } catch (...) {}
 }
 } // namespace starfell::launcher_gui

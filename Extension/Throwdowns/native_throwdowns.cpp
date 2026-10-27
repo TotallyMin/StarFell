@@ -619,6 +619,6 @@ void initialize_native_throwdowns(Address base) noexcept {
         }
         s.installed.store(true, std::memory_order_release);
     } catch (const std::exception& e) { logging::write(logging::Level::warning, logging::Channel::progression, e.what()); }
-    if (s.installed.load(std::memory_order_acquire) && !GetEnvironmentVariableW(L"RESKATE_NO_THROWDOWN_LAB", nullptr, 0)) initialize_throwdown_lab(base);
+    if (s.installed.load(std::memory_order_acquire) && !GetEnvironmentVariableW(L"STARFELL_NO_THROWDOWN_LAB", nullptr, 0)) initialize_throwdown_lab(base);
 }
 }

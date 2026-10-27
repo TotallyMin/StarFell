@@ -82,7 +82,7 @@ template<class F> std::string error_of(F&& run) {
 int main() {
     wchar_t temp[MAX_PATH]{};
     GetTempPathW(MAX_PATH, temp);
-    const auto root = fs::path(temp) / (L"reskate-mod-manager-tests-" + std::to_wstring(GetCurrentProcessId()));
+    const auto root = fs::path(temp) / (L"starfell-mod-manager-tests-" + std::to_wstring(GetCurrentProcessId()));
     fs::remove_all(root);
     const auto game = root / L"game";
     const auto sources = root / L"sources";
@@ -95,14 +95,14 @@ int main() {
         {"Cool Park/", ""},
         {"Cool Park/layout.toc", "toc"},
         {"Cool Park/Win32/levels/cool.sb", "bundle"},
-        {"Cool Park/reskate-mod.json", R"({"schema":1,"name":"Cool Park Deluxe","author":"Zee","version":"1.2","description":"A park."})"},
-        {"Cool Park/reskate-levels.json", R"({"schema":1,"levels":[{"asset":"levels/game/cool/cool"}]})"}});
+        {"Cool Park/starfell-mod.json", R"({"schema":1,"name":"Cool Park Deluxe","author":"Zee","version":"1.2","description":"A park."})"},
+        {"Cool Park/starfell-levels.json", R"({"schema":1,"levels":[{"asset":"levels/game/cool/cool"}]})"}});
     check(install(mods, sources / L"download (1).zip") == "Cool Park", "A zip's top folder names the mod");
     check(read(mods / L"Cool Park" / L"Win32" / L"levels" / L"cool.sb") == "bundle", "Nested files are extracted");
-    check(!fs::exists(mods / L".reskate-install"), "Staging is cleaned up");
+    check(!fs::exists(mods / L".starfell-install"), "Staging is cleaned up");
 
     // Files at the top of the zip: the archive's name becomes the folder name.
-    make_zip(sources / L"Flat Mod!.zip", {{"reskate-levels.json", R"({"schema":1,"levels":[]})"}});
+    make_zip(sources / L"Flat Mod!.zip", {{"starfell-levels.json", R"({"schema":1,"levels":[]})"}});
     check(install(mods, sources / L"Flat Mod!.zip") == "Flat Mod_", "Unsafe characters in names are replaced");
 
     // Mods packed deeper, as release zips often are.
@@ -156,13 +156,13 @@ int main() {
               "Order and enabled state round-trip");
     check(read(mods / L"mods.json").find(R"("enabled": false)") != std::string::npos, "mods.json is plain readable JSON");
 
-    // Metadata from reskate-mod.json.
-    write(mods / L"Deep_Mod" / L"reskate-mod.json",
+    // Metadata from starfell-mod.json.
+    write(mods / L"Deep_Mod" / L"starfell-mod.json",
           "\xef\xbb\xbf{\"name\":\"Deep\",\"author\":\"Someone\",\"version\":\"3\",\"description\":\"Line\\u0001\"}");
     for (const auto& entry : mods::scan_mods(game).entries)
         if (entry.mod.name == "Deep_Mod")
             check(entry.mod.title == "Deep" && entry.mod.author == "Someone" && entry.mod.version == "3" &&
-                  entry.mod.description == "Line?", "reskate-mod.json fills the details, control characters removed");
+                  entry.mod.description == "Line?", "starfell-mod.json fills the details, control characters removed");
 
     // manifest.json is preferred, with version_number.
     write(mods / L"Deep_Mod" / L"manifest.json",
@@ -170,7 +170,7 @@ int main() {
     for (const auto& entry : mods::scan_mods(game).entries)
         if (entry.mod.name == "Deep_Mod")
             check(entry.mod.title == "Deep Manifest" && entry.mod.author == "Park Maker" && entry.mod.version == "2.1.0" &&
-                  entry.mod.description == "From the manifest", "manifest.json fills the details ahead of reskate-mod.json");
+                  entry.mod.description == "From the manifest", "manifest.json fills the details ahead of starfell-mod.json");
 
     // Park mods: parks/<map>.park.json is listed per map.
     write(mods / L"Deep_Mod" / L"parks" / L"bam.park.json", "{}");

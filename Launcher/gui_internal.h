@@ -125,7 +125,7 @@ struct Settings {
     bool close_on_launch{true};
     // Off: never replace StarFell.dll or the launcher (keeps a test build someone handed out).
     bool updates{true};
-    // Off: a crash uploads nothing (RESKATE_CRASH_REPORTING=0 for the launcher and the game).
+    // Off: a crash uploads nothing (STARFELL_CRASH_REPORTING=0 for the launcher and the game).
     bool crash_reports{true};
     std::string steam_username;   // never the password
     bool steam_remember{true};

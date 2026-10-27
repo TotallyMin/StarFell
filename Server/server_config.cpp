@@ -264,7 +264,7 @@ std::vector<std::string> load_levels(const std::filesystem::path &mods) {
     std::error_code error;
     if (!std::filesystem::is_directory(mods, error)) return problems;
     for (const auto &entry : std::filesystem::directory_iterator(mods, error)) {
-        const auto manifest = entry.path() / "reskate-levels.json";
+        const auto manifest = entry.path() / "starfell-levels.json";
         if (!entry.is_directory() || !std::filesystem::exists(manifest)) continue;
         try {
             std::ifstream in(manifest, std::ios::binary);

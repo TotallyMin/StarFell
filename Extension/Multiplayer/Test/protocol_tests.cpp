@@ -857,7 +857,7 @@ void dedicated_server_codec() {
               row->capacity == 16 && row->password_required && row->code == format_invite({server, ad.secret}),
           "Server tags did not round trip");
     check(!read_server_tags(tags, player), "A player's ID read as a server");
-    check(!read_server_tags("reskate,v1,k1,c4", server), "An incompatible server version listed");
+    check(!read_server_tags("starfell,v1,k1,c4", server), "An incompatible server version listed");
 }
 int main() {
     try {

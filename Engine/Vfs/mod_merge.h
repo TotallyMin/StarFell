@@ -12,7 +12,7 @@ namespace starfell::mods {
 struct Catalog;
 
 struct MergeReport {
-    bool built{};                       // Mods/.reskate holds a usable patch
+    bool built{};                       // Mods/.starfell holds a usable patch
     bool reused{};                      // it is the previous launch's, nothing having changed
     std::size_t superbundles{};         // superbundle TOCs written
     std::size_t mergedBundles{};        // bundles combined from two or more mods
@@ -55,7 +55,7 @@ using MergeObserver = std::function<void(const MergeProgress&)>;
 
 struct MergeOptions {
     // A merge while the game runs, between level loads. The engine keeps
-    // archives it has read open, so nothing already in Mods/.reskate is
+    // archives it has read open, so nothing already in Mods/.starfell is
     // replaced or deleted: archives stay where the launch's merge put them,
     // new bundle manifests are appended to the end of archive 1, and the
     // superbundle TOCs (read afresh at each mount) are rewritten. layout.toc is
@@ -64,7 +64,7 @@ struct MergeOptions {
     bool live{};
 };
 
-// Combines every enabled mod into one patch under Mods/.reskate: superbundle
+// Combines every enabled mod into one patch under Mods/.starfell: superbundle
 // TOCs whose bundles carry the base assets plus each mod's additions, and each
 // mod's cas archives re-indexed so they cannot collide. The engine composes
 // exactly one patch per superbundle, so a single merged layer is the only shape

@@ -234,13 +234,13 @@ std::filesystem::path default_path() {
     std::array<wchar_t, 32768> buffer{};
     const auto n = GetEnvironmentVariableW(L"LOCALAPPDATA", buffer.data(), static_cast<DWORD>(buffer.size()));
     require(n && n < buffer.size(), "LOCALAPPDATA is unavailable");
-    return std::filesystem::path(buffer.data()) / L"StarFell" / L"profiles" / L"offline" / L"reskate.sqlite3";
+    return std::filesystem::path(buffer.data()) / L"StarFell" / L"profiles" / L"offline" / L"starfell.sqlite3";
 }
 std::filesystem::path defaults_path() {
     std::array<wchar_t, 32768> buffer{};
     const auto count = GetModuleFileNameW(nullptr, buffer.data(), static_cast<DWORD>(buffer.size()));
     require(count && count < buffer.size(), "Cannot resolve StarFell defaults path");
-    return std::filesystem::path(buffer.data()).parent_path() / L"reskate.defaults.json";
+    return std::filesystem::path(buffer.data()).parent_path() / L"starfell.defaults.json";
 }
 // Entitlement ids are game data: every one in the installed content cache is
 // owned by default, alongside anything the repository defaults add.

@@ -44,7 +44,7 @@ struct LaunchOptions {
     bool loose_files{true};
     bool offline{};
     // Virtual-key codes that open StarFell's menu and console (--menu-key /
-    // --console-key); passed to the game as RESKATE_MENU_KEY / RESKATE_CONSOLE_KEY.
+    // --console-key); passed to the game as STARFELL_MENU_KEY / STARFELL_CONSOLE_KEY.
     unsigned menu_key{0x2D};     // VK_INSERT
     unsigned console_key{0xC0};  // VK_OEM_3, the key left of 1
     std::string log_level{"info"};
@@ -96,11 +96,11 @@ std::uint32_t exported_function_rva(const std::filesystem::path& path,
 void validate_game_file(const std::filesystem::path& path);
 void validate_steam_api_file(const std::filesystem::path& path);
 
-// -offline: the launcher sets RESKATE_OFFLINE=1 so the game runs without Steam,
+// -offline: the launcher sets STARFELL_OFFLINE=1 so the game runs without Steam,
 // as "Unknown Player", with multiplayer hidden. Read once per process.
 inline constexpr const char* offline_player_name = "Unknown Player";
 bool offline_mode() noexcept;
-// The SteamID offline mode reports: RESKATE_OFFLINE_STEAM_ID, the account
+// The SteamID offline mode reports: STARFELL_OFFLINE_STEAM_ID, the account
 // Steam was last signed in to, so the game keeps the same settings save.
 std::uint64_t offline_steam_id() noexcept;
 
@@ -108,7 +108,7 @@ std::uint64_t offline_steam_id() noexcept;
 inline constexpr unsigned default_menu_key = 0x2D;     // VK_INSERT
 inline constexpr unsigned default_console_key = 0xC0;  // VK_OEM_3
 struct OverlayKeys { unsigned menu{default_menu_key}, console{default_console_key}; };
-// The keys the launcher chose (RESKATE_MENU_KEY / RESKATE_CONSOLE_KEY), or
+// The keys the launcher chose (STARFELL_MENU_KEY / STARFELL_CONSOLE_KEY), or
 // the defaults. Read once per process.
 OverlayKeys overlay_keys() noexcept;
 // Whether a virtual key can open the menu or console: not a mouse button,

@@ -80,7 +80,7 @@ std::string server_tags(const Advertisement &a) {
     constexpr char hex[] = "0123456789abcdef";
     std::string secret;
     for (int shift = 60; shift >= 0; shift -= 4) secret += hex[(a.secret >> shift) & 15];
-    auto tags = "reskate,v" + std::to_string(multiplayer::protocol_version) + ",k" + secret + ",p" +
+    auto tags = "starfell,v" + std::to_string(multiplayer::protocol_version) + ",k" + secret + ",p" +
                 std::to_string(a.players) + ",c" + std::to_string(a.max_players) + (a.password ? ",w1" : ",w0");
     tags += ",m" + tag_text(a.map, 24);
     tags += ",n" + tag_text(a.name, 127 - tags.size() - 2);
@@ -116,7 +116,7 @@ bool SteamServer::start(const std::filesystem::path &folder, std::uint16_t port,
             symbol<void (*)(void *, const char *)>(module_, name)(server_, value);
         };
         text("SteamAPI_ISteamGameServer_SetModDir", "skate");
-        text("SteamAPI_ISteamGameServer_SetProduct", "reskate");
+        text("SteamAPI_ISteamGameServer_SetProduct", "starfell");
         text("SteamAPI_ISteamGameServer_SetGameDescription", "StarFell dedicated server");
         symbol<void (*)(void *, bool)>(module_, "SteamAPI_ISteamGameServer_SetDedicatedServer")(server_, true);
         symbol<void (*)(void *)>(module_, "SteamAPI_ISteamGameServer_LogOnAnonymous")(server_);

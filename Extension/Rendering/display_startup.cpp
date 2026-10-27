@@ -32,8 +32,8 @@ unsigned dimension(const wchar_t* name, unsigned minimum) {
 }
 
 bool start_display_settings(std::uintptr_t base) {
-    const auto width = dimension(L"RESKATE_WINDOW_WIDTH", 320);
-    const auto height = dimension(L"RESKATE_WINDOW_HEIGHT", 200);
+    const auto width = dimension(L"STARFELL_WINDOW_WIDTH", 320);
+    const auto height = dimension(L"STARFELL_WINDOW_HEIGHT", 200);
     if (!width && !height) return true; // Respect saved settings unless explicitly overridden.
     if (!width || !height) return false;
     display_script = "Window=Window or {}\nRenderDevice=RenderDevice or {}\nWindow.Width=" + std::to_string(width) +
