@@ -1,0 +1,9 @@
+{
+  "DisableFTUE": true,
+  "StarFell.UnlockNeighborhoods": true,
+  "StarFell.UnlockPresetSlots": true,
+  "StarFell.MaxNeighborhoodRanks": true,
+  "StarFell.UnlockBusStops": true,
+  "StarFell.UnlockCosmetics": true,
+  "StarFell.UnlockObjects": true
+}

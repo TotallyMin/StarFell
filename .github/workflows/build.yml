@@ -1,0 +1,76 @@
+name: Build StarFell
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version stamped into the binaries (e.g. 0.2.0)
+        required: true
+        default: 0.0.0-dev
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Windows x64 Release
+    runs-on: windows-2026
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: pwsh
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Configure
+        env:
+          StarFell_BACKTRACE_URL: ${{ secrets.STARFELL_BACKTRACE_URL }}
+        run: cmake --preset vs2026-x64 -DSTARFELL_LAUNCHER_AUTO_UPDATE=ON '-DSTARFELL_VERSION=${{ inputs.version }}'
+
+      - name: Build launcher and runtime
+        run: cmake --build --preset release --parallel 4 --target starfell_launcher starfell_runtime
+
+      - name: Stage package
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $package = 'build/package'
+          New-Item -ItemType Directory -Path "$package/licenses" -Force | Out-Null
+          Copy-Item -LiteralPath 'build/vs2022-x64/Release/StarFellLauncher.exe' -Destination $package
+          Copy-Item -LiteralPath 'build/vs2022-x64/Release/StarFell.dll' -Destination $package
+          $symbols = 'build/symbols'
+          New-Item -ItemType Directory -Path $symbols -Force | Out-Null
+          foreach ($name in @('StarFell', 'StarFellLauncher')) {
+            Copy-Item -LiteralPath "build/vs2022-x64/Release/$name.pdb" -Destination $symbols
+          }
+          Copy-Item -LiteralPath 'build/vs2022-x64/Release/StarFell.dll' -Destination $symbols
+          Copy-Item -LiteralPath 'build/vs2022-x64/Release/StarFellLauncher.exe' -Destination $symbols
+          Copy-Item -LiteralPath 'LICENSE' -Destination "$package/LICENSE.txt"
+          foreach ($library in @('imgui', 'detours', 'rapidjson', 'sqlite', 'miniz', 'bcdec')) {
+            Copy-Item -LiteralPath "External/$library/LICENSE.txt" -Destination "$package/licenses/$library-LICENSE.txt"
+          }
+          foreach ($library in @('spdlog', 'lz4', 'zstd', 'steam_networking')) {
+            Copy-Item -LiteralPath "External/$library/LICENSE" -Destination "$package/licenses/$library-LICENSE.txt"
+          }
+          Copy-Item -Path 'External/fonts/*-LICENSE.txt' -Destination "$package/licenses"
+
+      - name: Upload StarFell ZIP
+        uses: actions/upload-artifact@v7
+        with:
+          name: StarFell-windows-x64-${{ github.sha }}
+          path: build/package/
+          archive: true
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Upload matching debug symbols
+        uses: actions/upload-artifact@v7
+        with:
+          name: StarFell-symbols-${{ github.sha }}
+          path: build/symbols/
+          archive: true
+          if-no-files-found: error
+          retention-days: 30

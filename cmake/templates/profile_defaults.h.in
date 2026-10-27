@@ -1,0 +1,5 @@
+#pragma once
+// Generated from the corresponding config JSON at configure time.
+namespace starfell::embedded {
+inline constexpr unsigned char embedded_profile_defaults[]{@STARFELL_DEFAULTS_BYTES@};
+}
