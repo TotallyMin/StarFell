@@ -8,6 +8,7 @@ StarFell allows you to play **skate.** offline, host your own lobbies and have t
 
 > [!IMPORTANT]
 > StarFell is a hobby project and is not affiliated with or endorsed by Electronic Arts (EA) or Full Circle.
+
 > You need your own copy of skate. on steam, which you can get by clicking the link below
 
 https://store.steampowered.com/app/3354750/skate/
