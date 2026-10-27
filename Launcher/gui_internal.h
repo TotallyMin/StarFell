@@ -34,8 +34,8 @@ namespace update = launcher_update;
 
 // ---------------------------------------------------------------- look
 
-constexpr float design_width = 1180.0f;
-constexpr float design_height = 680.0f;
+constexpr float design_width = 1280.0f;
+constexpr float design_height = 768.0f;
 
 inline ImU32 rgba(int r, int g, int b, float a = 1.0f) {
     return IM_COL32(r, g, b, static_cast<int>(std::clamp(a, 0.0f, 1.0f) * 255.0f));
